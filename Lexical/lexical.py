@@ -38,7 +38,7 @@ def switchReservedSymbol():
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else')
 
-file_src = os.path.join(".pas", "test_comments.pas")
+file_src = os.path.join("../.pas", "test_comments.pas")
 
 file = open(file_src, 'r')
 content = file.read()
