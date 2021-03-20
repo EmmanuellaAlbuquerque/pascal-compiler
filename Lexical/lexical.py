@@ -15,20 +15,27 @@ def addToken(word, sym, line_counter):
     output_table['Line'] = line_counter
     output_list.append(output_table.copy())
 
+def fill_blanks(data, size):
+    data = str(data)
+    if len(data)>size:
+        data = data[:size]
+    return str('|  ' + data.ljust(size) )
 
-def printTable():
-    print(
-        f'|Token{abs(len("Token") - 20)*" "}|Symbol{abs(len("Symbol") - 20)*" "}|Line')
-    print('================================================')
+def printTable(table):
+    table.append(fill_blanks('Token', 30) + fill_blanks("Symbol", 30) + fill_blanks('Line', 5) + '  |')
+    table.append('================================================================================')
     for item in output_list:
         token = item["Token"].rstrip("\n")
         symbol = item["Symbol"].rstrip("\n")
         line = item["Line"]
-        print(
-            f'|{token}{abs(len(token) - 20)*" "}|{symbol}{abs(len(symbol) - 20)*" "}|{line}')
-        # exit()
+        table.append(fill_blanks(token, 30) + fill_blanks(symbol, 30) +  fill_blanks(line, 5) + '  |')
 
+    with open("./resultado/tabela.txt", "w") as file:
+        for i in table:
+            print(i)
+            file.write(str(i + '\n'))
 
+   
 def switchReservedSymbol():
     for item in output_list:
         if(item['Token'] in reserved_words):
@@ -50,6 +57,7 @@ line_counter = 1
 
 output_table = dict()
 output_list = list()
+tabela = []
 
 while(True):
     current_char += 1
@@ -61,7 +69,7 @@ while(True):
     if (current_char == len(char_list)):
         # print(line_counter)
         switchReservedSymbol()
-        printTable()
+        printTable(tabela)
         exit()
 
     if (current_state == 0):  # Q0
