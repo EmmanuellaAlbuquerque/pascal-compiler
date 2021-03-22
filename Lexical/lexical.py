@@ -43,14 +43,14 @@ def printTable(table):
 
 def switchReservedSymbol():
     for item in output_list:
-        if(item['Token'] in reserved_words):
+        if(item['Token'].lower() in reserved_words):
             item['Symbol'] = 'Reserved Word'
 
 
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
-                  'else', 'boolean', 'procedure', 'while', 'do', 'not')
+                  'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "test_comments.pas")
+file_src = os.path.join("../.pas", "average.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -71,7 +71,7 @@ while(True):
         printTable(tabela)
         exit()
 
-    if (current_state == 0):  # Q0
+    if (current_state == 0):
         az = re.findall("[a-zA-Z]", char_list[current_char])
         digit09 = re.findall("[0-9]", char_list[current_char])
         if (len(az) > 0):
@@ -80,20 +80,21 @@ while(True):
         elif (len(digit09) > 0):
             current_state = 2
             token = char_list[current_char]
-        elif (char_list[current_char] == ' '):
+        elif (char_list[current_char] == ' ' or char_list[current_char] == '\t'):
             current_state = 0
         elif (char_list[current_char] == ':'):
             token = char_list[current_char]
             current_state = 3
-        elif (char_list[current_char] == '.'):
-            # print('delimiter: ' + token)
-            addToken(char_list[current_char], 'Delimiter', line_counter)
-        elif (char_list[current_char] == '\n' or char_list[current_char] == '\t'):
+        elif (char_list[current_char] == '\n'):
             line_counter += 1
         elif (char_list[current_char] == '{'):
             token = char_list[current_char]
             current_state = 6
-        elif (char_list[current_char] == ';'):
+        elif (char_list[current_char] == ';'
+              or char_list[current_char] == ','
+              or char_list[current_char] == '('
+              or char_list[current_char] == ')'
+              or char_list[current_char] == '.'):
             addToken(char_list[current_char], 'Delimiter', line_counter)
         continue
     if (current_state == 1):
@@ -111,7 +112,7 @@ while(True):
         # exit()
     if (current_state == 2):
         digit09 = re.findall("[0-9]", char_list[current_char])
-        if(len(digit09) > 0):
+        if(len(digit09) > 0 or char_list[current_char] == '.'):
             current_state = 2
             token += char_list[current_char]
         else:
@@ -125,9 +126,14 @@ while(True):
         if(char_list[current_char] == '='):
             current_state = 4
             token += char_list[current_char]
+            # print('delimiter: ' + token)
+            addToken(token, 'Delimiter', line_counter)
+            current_state = 0
+            token = ''
         else:
             # print('delimiter: ' + token)
             addToken(token, 'Delimiter', line_counter)
+            current_char -= 1
             current_state = 0
             token = ''
         continue
