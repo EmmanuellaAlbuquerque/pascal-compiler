@@ -1,0 +1,24 @@
+|  Token                         |  Symbol                        |  Line   |
+================================================================================
+|  {
+programa: exemplo
+}         |  Comments                      |  3      |
+|  program                       |  Reserved Word                 |  4      |
+|  teste                         |  Identifier                    |  4      |
+|  ;                             |  Delimiter                     |  4      |
+|  var                           |  Reserved Word                 |  5      |
+|  valor1                        |  Identifier                    |  6      |
+|  :                             |  Delimiter                     |  6      |
+|  integer                       |  Reserved Word                 |  6      |
+|  ;                             |  Delimiter                     |  6      |
+|  valor2                        |  Identifier                    |  7      |
+|  :                             |  Delimiter                     |  7      |
+|  real                          |  Reserved Word                 |  7      |
+|  ;                             |  Delimiter                     |  7      |
+|  begin                         |  Reserved Word                 |  8      |
+|  valor1                        |  Identifier                    |  9      |
+|  :=                            |  Assignment Command            |  9      |
+|  10                            |  Number                        |  9      |
+|  ;                             |  Delimiter                     |  9      |
+|  end                           |  Reserved Word                 |  10     |
+|  .                             |  Delimiter                     |  10     |
