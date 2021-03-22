@@ -1,0 +1,66 @@
+|  Token                         |  Symbol                        |  Line   |
+================================================================================
+|  Program                       |  Reserved Word                 |  1      |
+|  resultado                     |  Identifier                    |  1      |
+|  ;                             |  Delimiter                     |  1      |
+|  Var                           |  Reserved Word                 |  2      |
+|  N1                            |  Identifier                    |  2      |
+|  ,                             |  Delimiter                     |  2      |
+|  N2                            |  Identifier                    |  2      |
+|  ,                             |  Delimiter                     |  2      |
+|  N3                            |  Identifier                    |  2      |
+|  :                             |  Delimiter                     |  2      |
+|  Real                          |  Reserved Word                 |  2      |
+|  ;                             |  Delimiter                     |  2      |
+|  S                             |  Identifier                    |  3      |
+|  ,                             |  Delimiter                     |  3      |
+|  M                             |  Identifier                    |  3      |
+|  :                             |  Delimiter                     |  3      |
+|  Real                          |  Reserved Word                 |  3      |
+|  ;                             |  Delimiter                     |  3      |
+|  Result                        |  Identifier                    |  4      |
+|  :                             |  Delimiter                     |  4      |
+|  Boolean                       |  Reserved Word                 |  4      |
+|  ;                             |  Delimiter                     |  4      |
+|  Begin                         |  Reserved Word                 |  5      |
+|  N1                            |  Identifier                    |  6      |
+|  :=                            |  Delimiter                     |  6      |
+|  7.5                           |  Number                        |  6      |
+|  ;                             |  Delimiter                     |  6      |
+|  N2                            |  Identifier                    |  7      |
+|  :=                            |  Delimiter                     |  7      |
+|  5.5                           |  Number                        |  7      |
+|  ;                             |  Delimiter                     |  7      |
+|  N3                            |  Identifier                    |  8      |
+|  :=                            |  Delimiter                     |  8      |
+|  4.5                           |  Number                        |  8      |
+|  ;                             |  Delimiter                     |  8      |
+|  S                             |  Identifier                    |  9      |
+|  :=                            |  Delimiter                     |  9      |
+|  N1                            |  Identifier                    |  9      |
+|  N2                            |  Identifier                    |  9      |
+|  N3                            |  Identifier                    |  9      |
+|  ;                             |  Delimiter                     |  9      |
+|  M                             |  Identifier                    |  10     |
+|  :=                            |  Delimiter                     |  10     |
+|  S                             |  Identifier                    |  10     |
+|  3                             |  Number                        |  10     |
+|  ;                             |  Delimiter                     |  10     |
+|  If                            |  Reserved Word                 |  11     |
+|  (                             |  Delimiter                     |  11     |
+|  M                             |  Identifier                    |  11     |
+|  5                             |  Number                        |  11     |
+|  )                             |  Delimiter                     |  11     |
+|  Then                          |  Reserved Word                 |  11     |
+|  Result                        |  Identifier                    |  12     |
+|  :=                            |  Delimiter                     |  12     |
+|  True                          |  Reserved Word                 |  12     |
+|  a                             |  Identifier                    |  13     |
+|  5                             |  Number                        |  13     |
+|  Else                          |  Reserved Word                 |  14     |
+|  Result                        |  Identifier                    |  15     |
+|  :=                            |  Delimiter                     |  15     |
+|  False                         |  Reserved Word                 |  15     |
+|  ;                             |  Delimiter                     |  15     |
+|  End                           |  Reserved Word                 |  16     |
+|  .                             |  Delimiter                     |  16     |

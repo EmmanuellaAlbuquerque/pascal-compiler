@@ -1,5 +1,5 @@
 {
-  programa: exemplo
+programa: exemplo
 }
 program teste;
 var
