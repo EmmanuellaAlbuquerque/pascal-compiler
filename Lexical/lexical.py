@@ -47,10 +47,11 @@ def switchReservedSymbol():
             item['Symbol'] = 'Reserved Word'
 
 
+# key words
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "average.pas")
+file_src = os.path.join("../.pas", "real_numbers.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -112,10 +113,14 @@ while(True):
         # exit()
     if (current_state == 2):
         digit09 = re.findall("[0-9]", char_list[current_char])
-        if(len(digit09) > 0 or char_list[current_char] == '.'):
+        if(len(digit09) > 0):
             current_state = 2
             token += char_list[current_char]
         else:
+            if (char_list[current_char] == '.'):
+                current_state = 7
+                token += char_list[current_char]
+                continue
             # print('number: ' + token)
             addToken(token, 'Number', line_counter)
             current_char -= 1
@@ -152,4 +157,16 @@ while(True):
             token = ''
         elif (char_list[current_char] == '\n'):
             line_counter += 1
+        continue
+    if (current_state == 7):
+        digit09 = re.findall("[0-9]", char_list[current_char])
+        if(len(digit09) > 0):
+            current_state = 7
+            token += char_list[current_char]
+        else:
+            # print('number: ' + token)
+            addToken(token, 'Number', line_counter)
+            current_char -= 1
+            current_state = 0
+            token = ''
         continue
