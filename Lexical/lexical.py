@@ -55,7 +55,7 @@ def switchReservedSymbol():
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "open_comment.pas")
+file_src = os.path.join("../.pas", "test.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -143,17 +143,16 @@ while(True):
                 token += char_list[current_char]
                 continue
             # print('number: ' + token)
-            addToken(token, 'Number', line_counter)
+            addToken(token, 'Integer Number', line_counter)
             current_char -= 1
             current_state = 0
             token = ''
         continue
     if (current_state == 3):
         if(char_list[current_char] == '='):
-            current_state = 4
             token += char_list[current_char]
-            # print('delimiter: ' + token)
-            addToken(token, 'Delimiter', line_counter)
+            # print('assignment command: ' + token)
+            addToken(token, 'Assignment Command', line_counter)
             current_state = 0
             token = ''
         else:
@@ -163,17 +162,11 @@ while(True):
             current_state = 0
             token = ''
         continue
-    if (current_state == 4):
-        # print('assignment command: ' + token)
-        addToken(token, 'Assignment Command', line_counter)
-        current_state = 0
-        token = ''
-        continue
     if (current_state == 6):
         token += char_list[current_char]
         if(char_list[current_char] == '}'):
             # print('comments: ' + token)
-            addToken(token, 'Comments', line_counter)
+            # addToken(token, 'Comments', line_counter)
             current_state = 0
             token = ''
         elif (current_char == (len(char_list) - 1)):
@@ -188,7 +181,7 @@ while(True):
             token += char_list[current_char]
         else:
             # print('number: ' + token)
-            addToken(token, 'Number', line_counter)
+            addToken(token, 'Real Number', line_counter)
             current_char -= 1
             current_state = 0
             token = ''
