@@ -45,13 +45,17 @@ def switchReservedSymbol():
     for item in output_list:
         if(item['Token'].lower() in reserved_words):
             item['Symbol'] = 'Reserved Word'
+        if(item['Token'] == 'or'):
+            item['Symbol'] = 'Additive Operator'
+        if(item['Token'] == 'and'):
+            item['Symbol'] = 'Multiplicative Operator'
 
 
 # key words
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "relational_operators.pas")
+file_src = os.path.join("../.pas", "multiplicative_operators.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -106,6 +110,12 @@ while(True):
         elif (char_list[current_char] == '='):
             addToken(char_list[current_char],
                      'Relational Operator', line_counter)
+        elif (char_list[current_char] == '+' or char_list[current_char] == '-'):
+            addToken(char_list[current_char],
+                     'Additive Operator', line_counter)
+        elif (char_list[current_char] == '*' or char_list[current_char] == '/'):
+            addToken(char_list[current_char],
+                     'Multiplicative Operator', line_counter)
         continue
     if (current_state == 1):
         az09 = re.findall("\w", char_list[current_char])

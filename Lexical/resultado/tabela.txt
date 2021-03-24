@@ -1,81 +1,61 @@
 |  Token                         |  Symbol                        |  Line   |
 ================================================================================
-|  Program                       |  Reserved Word                 |  1      |
-|  relationalOperators           |  Identifier                    |  1      |
+|  program                       |  Reserved Word                 |  1      |
+|  multiplicative_operators      |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
-|  Var                           |  Reserved Word                 |  2      |
+|  var                           |  Reserved Word                 |  2      |
 |  a                             |  Identifier                    |  3      |
 |  ,                             |  Delimiter                     |  3      |
 |  b                             |  Identifier                    |  3      |
+|  ,                             |  Delimiter                     |  3      |
+|  result                        |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  result                        |  Identifier                    |  4      |
+|  ttrue                         |  Identifier                    |  4      |
+|  ,                             |  Delimiter                     |  4      |
+|  tfalse                        |  Identifier                    |  4      |
 |  :                             |  Delimiter                     |  4      |
 |  boolean                       |  Reserved Word                 |  4      |
 |  ;                             |  Delimiter                     |  4      |
-|  Begin                         |  Reserved Word                 |  6      |
+|  begin                         |  Reserved Word                 |  6      |
 |  a                             |  Identifier                    |  7      |
 |  :=                            |  Delimiter                     |  7      |
-|  100                           |  Number                        |  7      |
+|  20                            |  Number                        |  7      |
 |  ;                             |  Delimiter                     |  7      |
 |  b                             |  Identifier                    |  8      |
 |  :=                            |  Delimiter                     |  8      |
-|  10                            |  Number                        |  8      |
+|  50                            |  Number                        |  8      |
 |  ;                             |  Delimiter                     |  8      |
-|  if                            |  Reserved Word                 |  10     |
-|  a                             |  Identifier                    |  10     |
-|  =                             |  Relational Operator           |  10     |
-|  b                             |  Identifier                    |  10     |
-|  then                          |  Reserved Word                 |  10     |
-|  result                        |  Identifier                    |  11     |
-|  :=                            |  Delimiter                     |  11     |
-|  true                          |  Reserved Word                 |  11     |
-|  if                            |  Reserved Word                 |  13     |
-|  a                             |  Identifier                    |  13     |
-|  <                             |  Relational Operator           |  13     |
-|  b                             |  Identifier                    |  13     |
-|  then                          |  Reserved Word                 |  13     |
+|  ttrue                         |  Identifier                    |  9      |
+|  :=                            |  Delimiter                     |  9      |
+|  true                          |  Reserved Word                 |  9      |
+|  ;                             |  Delimiter                     |  9      |
+|  tfalse                        |  Identifier                    |  10     |
+|  :=                            |  Delimiter                     |  10     |
+|  false                         |  Reserved Word                 |  10     |
+|  ;                             |  Delimiter                     |  10     |
+|  result                        |  Identifier                    |  12     |
+|  :=                            |  Delimiter                     |  12     |
+|  a                             |  Identifier                    |  12     |
+|  *                             |  Multiplicative Operator       |  12     |
+|  b                             |  Identifier                    |  12     |
+|  ;                             |  Delimiter                     |  12     |
 |  result                        |  Identifier                    |  14     |
 |  :=                            |  Delimiter                     |  14     |
-|  true                          |  Reserved Word                 |  14     |
+|  a                             |  Identifier                    |  14     |
+|  /                             |  Multiplicative Operator       |  14     |
+|  b                             |  Identifier                    |  14     |
+|  ;                             |  Delimiter                     |  14     |
 |  if                            |  Reserved Word                 |  16     |
-|  a                             |  Identifier                    |  16     |
-|  >                             |  Relational Operator           |  16     |
-|  b                             |  Identifier                    |  16     |
+|  (                             |  Delimiter                     |  16     |
+|  ttrue                         |  Identifier                    |  16     |
+|  and                           |  Multiplicative Operator       |  16     |
+|  tfalse                        |  Identifier                    |  16     |
+|  )                             |  Delimiter                     |  16     |
 |  then                          |  Reserved Word                 |  16     |
-|  result                        |  Identifier                    |  17     |
+|  tresult                       |  Identifier                    |  17     |
 |  :=                            |  Delimiter                     |  17     |
 |  true                          |  Reserved Word                 |  17     |
-|  if                            |  Reserved Word                 |  19     |
-|  (                             |  Delimiter                     |  19     |
-|  a                             |  Identifier                    |  19     |
-|  <=                            |  Relational Operator           |  19     |
-|  b                             |  Identifier                    |  19     |
-|  )                             |  Delimiter                     |  19     |
-|  then                          |  Reserved Word                 |  19     |
-|  result                        |  Identifier                    |  20     |
-|  :=                            |  Delimiter                     |  20     |
-|  true                          |  Reserved Word                 |  20     |
-|  if                            |  Reserved Word                 |  22     |
-|  (                             |  Delimiter                     |  22     |
-|  b                             |  Identifier                    |  22     |
-|  >=                            |  Relational Operator           |  22     |
-|  a                             |  Identifier                    |  22     |
-|  )                             |  Delimiter                     |  22     |
-|  then                          |  Reserved Word                 |  22     |
-|  result                        |  Identifier                    |  23     |
-|  :=                            |  Delimiter                     |  23     |
-|  true                          |  Reserved Word                 |  23     |
-|  if                            |  Reserved Word                 |  25     |
-|  (                             |  Delimiter                     |  25     |
-|  a                             |  Identifier                    |  25     |
-|  <>                            |  Relational Operator           |  25     |
-|  b                             |  Identifier                    |  25     |
-|  )                             |  Delimiter                     |  25     |
-|  then                          |  Reserved Word                 |  25     |
-|  result                        |  Identifier                    |  26     |
-|  :=                            |  Delimiter                     |  26     |
-|  true                          |  Reserved Word                 |  26     |
-|  End                           |  Reserved Word                 |  27     |
-|  .                             |  Delimiter                     |  27     |
+|  end                           |  Reserved Word                 |  18     |
+|  .                             |  Delimiter                     |  18     |
