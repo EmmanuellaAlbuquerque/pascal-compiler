@@ -51,7 +51,7 @@ def switchReservedSymbol():
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "real_numbers.pas")
+file_src = os.path.join("../.pas", "relational_operators.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -97,6 +97,15 @@ while(True):
               or char_list[current_char] == ')'
               or char_list[current_char] == '.'):
             addToken(char_list[current_char], 'Delimiter', line_counter)
+        elif (char_list[current_char] == '>'):
+            token = char_list[current_char]
+            current_state = 8
+        elif (char_list[current_char] == '<'):
+            token = char_list[current_char]
+            current_state = 9
+        elif (char_list[current_char] == '='):
+            addToken(char_list[current_char],
+                     'Relational Operator', line_counter)
         continue
     if (current_state == 1):
         az09 = re.findall("\w", char_list[current_char])
@@ -166,6 +175,36 @@ while(True):
         else:
             # print('number: ' + token)
             addToken(token, 'Number', line_counter)
+            current_char -= 1
+            current_state = 0
+            token = ''
+        continue
+    if (current_state == 8):
+        if(char_list[current_char] == '='):
+            token += char_list[current_char]
+            addToken(token, 'Relational Operator', line_counter)
+            current_state = 0
+            token = ''
+        else:
+            addToken(token, 'Relational Operator', line_counter)
+            current_char -= 1
+            current_state = 0
+            token = ''
+        continue
+    if (current_state == 9):
+        if(char_list[current_char] == '='):
+            token += char_list[current_char]
+            addToken(token, 'Relational Operator', line_counter)
+            current_state = 0
+            token = ''
+        else:
+            if(char_list[current_char] == '>'):
+                token += char_list[current_char]
+                addToken(token, 'Relational Operator', line_counter)
+                current_state = 0
+                token = ''
+                continue
+            addToken(token, 'Relational Operator', line_counter)
             current_char -= 1
             current_state = 0
             token = ''
