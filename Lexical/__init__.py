@@ -1,10 +1,12 @@
 import os.path
 import re
 
+path_directory = os.path.dirname(os.path.abspath(__file__))
+
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = os.path.join("../.pas", "test.pas")
+file_src = path_directory + os.path.join("/../.pas", "test.pas")
 
 file = open(file_src, 'r')
 content = file.read()
@@ -45,7 +47,7 @@ def printTable(table):
         table.append(fill_blanks(token, 30) + fill_blanks(symbol,
                                                           30) + fill_blanks(line, 5) + '  |')
 
-    with open("./resultado/tabela.txt", "w") as file:
+    with open(path_directory + "/resultado/tabela.txt", "w") as file:
         for i in table:
             print(i)
             file.write(str(i + '\n'))
@@ -226,42 +228,44 @@ def switchToQ7():
     return
 
 
-while(True):
-    current_char += 1
+def runLexicalAnalysis():
+    global current_char
+    while(True):
+        current_char += 1
 
-    if (current_char == len(char_list)):
-        switchReservedSymbol()
-        printTable(tabela)
-        exit()
+        if (current_char == len(char_list)):
+            switchReservedSymbol()
+            # printTable(tabela)
+            return output_list
 
-    if (current_state == 0):
-        switchToQ0()
-        continue
+        if (current_state == 0):
+            switchToQ0()
+            continue
 
-    if (current_state == 1):
-        switchToQ1()
-        continue
+        if (current_state == 1):
+            switchToQ1()
+            continue
 
-    if (current_state == 2):
-        switchToQ2()
-        continue
+        if (current_state == 2):
+            switchToQ2()
+            continue
 
-    if (current_state == 3):
-        switchToQ3()
-        continue
+        if (current_state == 3):
+            switchToQ3()
+            continue
 
-    if (current_state == 4):
-        switchToQ4()
-        continue
+        if (current_state == 4):
+            switchToQ4()
+            continue
 
-    if (current_state == 5):
-        switchToQ5()
-        continue
+        if (current_state == 5):
+            switchToQ5()
+            continue
 
-    if (current_state == 6):
-        switchToQ6()
-        continue
+        if (current_state == 6):
+            switchToQ6()
+            continue
 
-    if (current_state == 7):
-        switchToQ7()
-        continue
+        if (current_state == 7):
+            switchToQ7()
+            continue
