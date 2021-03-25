@@ -1,4 +1,4 @@
-|  Token                         |  Symbol                        |  Line   |
+|  Token                         |  Classification                |  Line   |
 ================================================================================
 |  program                       |  Reserved Word                 |  1      |
 |  teste                         |  Identifier                    |  1      |
