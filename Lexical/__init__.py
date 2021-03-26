@@ -6,7 +6,7 @@ path_directory = os.path.dirname(os.path.abspath(__file__))
 reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                   'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-file_src = path_directory + os.path.join("/../.pas", "test.pas")
+file_src = path_directory + os.path.join("/../.pas", "ex_procedure.pas")
 
 file = open(file_src, 'r')
 content = file.read()

@@ -23,7 +23,8 @@ def type():
 
 
 def subprogramDeclarations():
-    print('-----')
+    lexical_item = lexical_dict[current_id]
+    print(lexical_item)
 
 
 def listOfIdentifiers2():
@@ -31,6 +32,7 @@ def listOfIdentifiers2():
     if (lexical_item['Token'] == ','):
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
+            lexical_item = next()
             listOfIdentifiers2()
         else:
             raise Exception(
@@ -75,6 +77,7 @@ def listVariableDeclarationsLine():
 def listVariableDeclarations():
     listOfIdentifiers()
     lexical_item = lexical_dict[current_id]
+    # print(lexical_item)
     if (lexical_item['Token'] == ':'):
         lexical_item = next()
         type()
@@ -84,10 +87,10 @@ def listVariableDeclarations():
             lexical_item = next()
             listVariableDeclarationsLine()
         else:
-            raise Exception('Error: Esperando ; veio: ' +
+            raise Exception('Error in listVariableDeclarations: Esperando ; veio: ' +
                             lexical_item['Token'])
     else:
-        raise Exception('Error: Esperando delimitador ":" veio: ' +
+        raise Exception('Error in listVariableDeclarations: Esperando delimitador ":" veio: ' +
                         lexical_item['Token'])
 
 
