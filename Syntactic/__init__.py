@@ -11,32 +11,122 @@ def next():
     return lexical_dict[current_id]
 
 
+def type():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'].lower() == 'integer'
+        or lexical_item['Token'].lower() == 'real'
+            or lexical_item['Token'].lower() == 'boolean'):
+        lexical_item = next()
+    else:
+        raise Exception(
+            'Error: tipo inválido: ' + lexical_item['Token'])
+
+
+def subprogramDeclarations():
+    print('-----')
+
+
+def listOfIdentifiers2():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == ','):
+        lexical_item = next()
+        if (lexical_item['Classification'] == 'Identifier'):
+            listOfIdentifiers2()
+        else:
+            raise Exception(
+                'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
+    else:
+        pass
+
+
+def listOfIdentifiers():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Classification'] == 'Identifier'):
+        lexical_item = next()
+        listOfIdentifiers2()
+    else:
+        raise Exception(
+            'Error: sintático, esperando um identificador veio: ' + lexical_item['Classification'])
+
+
+def listVariableDeclarationsLine():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Classification'] == 'Identifier'):
+        listOfIdentifiers()
+        lexical_item = lexical_dict[current_id]
+        if (lexical_item['Token'] == ':'):
+            lexical_item = next()
+            type()
+            # always get the changes after productions
+            lexical_item = lexical_dict[current_id]
+            if (lexical_item['Token'] == ';'):
+                lexical_item = next()
+                listVariableDeclarationsLine()
+            else:
+                raise Exception('Error: Esperando ; veio: ' +
+                                lexical_item['Token'])
+        else:
+            raise Exception('Error: Esperando delimitador ":" veio: ' +
+                            lexical_item['Token'])
+    else:
+        pass
+
+
+def listVariableDeclarations():
+    listOfIdentifiers()
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == ':'):
+        lexical_item = next()
+        type()
+        # always get the changes after productions
+        lexical_item = lexical_dict[current_id]
+        if (lexical_item['Token'] == ';'):
+            lexical_item = next()
+            listVariableDeclarationsLine()
+        else:
+            raise Exception('Error: Esperando ; veio: ' +
+                            lexical_item['Token'])
+    else:
+        raise Exception('Error: Esperando delimitador ":" veio: ' +
+                        lexical_item['Token'])
+
+
 def variableDeclarations():
-    print('----')
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'].lower() == 'var'):
+        lexical_item = next()
+        listVariableDeclarations()
+    else:
+        pass
 
 
 def program():
     lexical_item = lexical_dict[current_id]
-    if (lexical_item['Token'] == 'program'):
+    if (lexical_item['Token'].lower() == 'program'):
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
             lexical_item = next()
             if (lexical_item['Token'] == ';'):
                 lexical_item = next()
                 variableDeclarations()
-                # Dec_Subp()
+                # always get the changes after productions
+                lexical_item = lexical_dict[current_id]
+                subprogramDeclarations()
+                # always get the changes after productions
+                lexical_item = lexical_dict[current_id]
                 # Com_Com()
                 if (lexical_item['Token'] != '.'):
                     raise Exception(
                         'Error: Esperando delimitador "." veio: ' + lexical_item['Token'])
             else:
-                raise Exception('Error: Esperando ;, veio: ' +
+                raise Exception('Error: Esperando ; veio: ' +
                                 lexical_item['Token'])
         else:
-            raise Exception('Error: sintático ', + lexical_item['Token'])
+            raise Exception(
+                'Error: sintático, esperando um identificador veio: ' + lexical_item['Classification'])
     else:
         raise Exception(
-            'Error: Esperando palavra reservada program, veio ' + lexical_item['Token'])
+            'Error: Esperando palavra reservada program, veio: ' + lexical_item['Token'])
 
 
 def runSyntacticAnalysis(current_dict):
