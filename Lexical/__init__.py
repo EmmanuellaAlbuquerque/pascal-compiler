@@ -23,7 +23,7 @@ tabela = []
 
 def addToken(word, sym, line_counter):
     output_table['Token'] = word
-    output_table['Symbol'] = sym
+    output_table['Classification'] = sym
     output_table['Line'] = line_counter
     output_list.append(output_table.copy())
 
@@ -42,9 +42,9 @@ def printTable(table):
         '================================================================================')
     for item in output_list:
         token = item["Token"].rstrip("\n")
-        symbol = item["Symbol"].rstrip("\n")
+        classification = item["Classification"].rstrip("\n")
         line = item["Line"]
-        table.append(fill_blanks(token, 30) + fill_blanks(symbol,
+        table.append(fill_blanks(token, 30) + fill_blanks(classification,
                                                           30) + fill_blanks(line, 5) + '  |')
 
     with open(path_directory + "/resultado/tabela.txt", "w") as file:
@@ -56,11 +56,11 @@ def printTable(table):
 def switchReservedSymbol():
     for item in output_list:
         if(item['Token'].lower() in reserved_words):
-            item['Symbol'] = 'Reserved Word'
+            item['Classification'] = 'Reserved Word'
         if(item['Token'] == 'or'):
-            item['Symbol'] = 'Additive Operator'
+            item['Classification'] = 'Additive Operator'
         if(item['Token'] == 'and'):
-            item['Symbol'] = 'Multiplicative Operator'
+            item['Classification'] = 'Multiplicative Operator'
 
 
 def switchToQ0():
@@ -269,3 +269,6 @@ def runLexicalAnalysis():
         if (current_state == 7):
             switchToQ7()
             continue
+
+
+# runLexicalAnalysis()
