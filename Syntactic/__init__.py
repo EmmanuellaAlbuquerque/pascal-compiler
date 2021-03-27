@@ -22,9 +22,84 @@ def type():
             'Error: tipo inválido: ' + lexical_item['Token'])
 
 
-def subprogramDeclarations():
+def listOfParameters2():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == ';'):
+        lexical_item = next()
+        listOfParameters()
+
+
+def listOfParameters():
+    listOfIdentifiers()
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == ':'):
+        lexical_item = next()
+        type()
+        listOfParameters2()
+    else:
+        raise Exception('Error: Esperando delimitador ":" veio: ' +
+                        lexical_item['Token'])
+
+
+def arguments():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'].lower() == '('):
+        lexical_item = next()
+        listOfParameters()
+        lexical_item = lexical_dict[current_id]
+        if (lexical_item['Token'].lower() == ')'):
+            lexical_item = next()
+        else:
+            raise Exception('Error: Esperando ")" veio: ' +
+                            lexical_item['Token'])
+
+
+def compositeCommand():
+    print('------')
+
+
+def subprogramDeclaration():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'].lower() == 'procedure'):
+        lexical_item = next()
+        if (lexical_item['Classification'] == 'Identifier'):
+            lexical_item = next()
+            arguments()
+            lexical_item = lexical_dict[current_id]
+            if (lexical_item['Token'].lower() == ';'):
+                lexical_item = next()
+                variableDeclarations()
+                subprogramsDeclarations()
+                compositeCommand()
+            else:
+                raise Exception('Error: Esperando ; veio: ' +
+                                lexical_item['Token'])
+        else:
+            raise Exception(
+                'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
+    else:
+        raise Exception('Error: Esperando "procedure" veio: ' +
+                        lexical_item['Token'])
+
+
+def subprogramsDeclarationsLine():
+    subprogramDeclaration()
     lexical_item = lexical_dict[current_id]
     print(lexical_item)
+    if (lexical_item['Token'] == ';'):
+        lexical_item = next()
+        subprogramsDeclarationsLine()
+    else:
+        raise Exception('Error: Esperando ; veio: ' +
+                        lexical_item['Token'])
+
+
+def subprogramsDeclarations():
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == 'procedure'):
+        subprogramsDeclarationsLine()
+    else:
+        pass
 
 
 def listOfIdentifiers2():
@@ -114,7 +189,7 @@ def program():
                 variableDeclarations()
                 # always get the changes after productions
                 lexical_item = lexical_dict[current_id]
-                subprogramDeclarations()
+                subprogramsDeclarations()
                 # always get the changes after productions
                 lexical_item = lexical_dict[current_id]
                 # Com_Com()

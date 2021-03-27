@@ -1,8 +1,7 @@
 program exProcedure;
 var
    a, b, c,  min: integer;
-procedure findMin(x, y, z: integer; var m: integer); 
-(* Finds the minimum of the 3 values *)
+procedure findMin(x, y, z: integer; m: real); 
 
 begin
    if x < y then
@@ -12,4 +11,8 @@ begin
    
    if z < m then
       m:= z;
-end; { end of procedure findMin }  
+end;
+
+begin
+
+end.
