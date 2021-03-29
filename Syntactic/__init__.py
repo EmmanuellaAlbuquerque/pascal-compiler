@@ -56,9 +56,13 @@ def arguments():
 
 def relationalOp():
     lexical_item = lexical_dict[current_id]
-    print(lexical_item)
-    # if (lexical_item['Token'].lower() == '('):
-    #     lexical_item = next()
+    if (lexical_item['Token'] == '='
+            or lexical_item['Token'] == '<'
+            or lexical_item['Token'] == '>'
+            or lexical_item['Token'] == '<='
+            or lexical_item['Token'] == '>='
+            or lexical_item['Token'] == '<>'):
+        lexical_item = next()
 
 
 def factorC():
@@ -91,23 +95,19 @@ def factor():
         lexical_item = next()
         factor()
         lexical_item = lexical_dict[current_id]
-    else:
-        if (lexical_item['Classification'] == 'Relational Operator'):
+    elif (lexical_item['Token'].lower() == '('):
+        lexical_item = next()
+        expression()
+        lexical_item = lexical_dict[current_id]
+        if (lexical_item['Token'].lower() == ')'):
             lexical_item = next()
-            expression()
-        if (lexical_item['Token'].lower() == '('):
-            lexical_item = next()
-            expression()
-            lexical_item = lexical_dict[current_id]
-            if (lexical_item['Token'].lower() == ')'):
-                lexical_item = next()
-            else:
-                raise Exception('Error: Esperando ")" veio: ' +
-                                lexical_item['Token'])
+        else:
+            raise Exception('Error at factor Esperando ")" veio: ' +
+                            lexical_item['Token'])
 
 
 def multiplicativeOp():
-    print()
+    lexical_item = lexical_dict[current_id]
 
 
 def termLine():
@@ -118,19 +118,19 @@ def termLine():
 
 def term():
     factor()
-    termLine()
+    # termLine()
 
 
 def sign():
     lexical_item = lexical_dict[current_id]
-    print(lexical_item)
-    exit()
-    if (lexical_item['Classification'] == 'Identifier'):
+    if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-'):
         lexical_item = next()
+    else:
+        pass
 
 
 def opAdditive():
-    print()
+    lexical_item = lexical_dict[current_id]
 
 
 def simpleExpressionLine():
@@ -145,15 +145,14 @@ def simpleExpression():
     simpleExpressionLine()
 
 
-def simpleExpressionC():
+def expressionC():
     relationalOp()
     simpleExpression()
 
 
 def expression():
-    print('------')
-    # simpleExpression()
-    # simpleExpressionC()
+    simpleExpression()
+    expressionC()
 
 
 def expressionsListLine():
@@ -202,6 +201,7 @@ def partElse():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'else'):
         lexical_item = next()
+        command()
 
 
 def command():
@@ -209,7 +209,6 @@ def command():
     if (lexical_item['Classification'] == 'Identifier'):
         variable()
         lexical_item = lexical_dict[current_id]
-        print(lexical_item)
         if (lexical_item['Token'] == ':='):
             lexical_item = next()
             expression()
@@ -220,6 +219,7 @@ def command():
         lexical_item = next()
         expression()
         lexical_item = lexical_dict[current_id]
+
         if (lexical_item['Token'].lower() == 'then'):
             lexical_item = next()
             command()
@@ -245,6 +245,10 @@ def commandsListLine():
     if (lexical_item['Token'].lower() == ';'):
         lexical_item = next()
         command()
+    else:
+        # pass
+        raise Exception('Error at ' + str(lexical_item['Line']) + ' esperando ";" veio: ' +
+                        lexical_item['Token'])
 
 
 def commandsList():
@@ -265,7 +269,7 @@ def compositeCommand():
         if (lexical_item['Token'].lower() == 'end'):
             lexical_item = next()
         else:
-            raise Exception('Error: Esperando o fechamento do comando composto "end", veio: ' +
+            raise Exception('Error in line ' + str(lexical_item['Line']) + ' esperando o fechamento do comando composto "end", veio: ' +
                             lexical_item['Token'])
 
 
@@ -289,20 +293,17 @@ def subprogramDeclaration():
             raise Exception(
                 'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
     else:
-        raise Exception('Error: Esperando "procedure" veio: ' +
-                        lexical_item['Token'])
+        pass
 
 
 def subprogramsDeclarationsLine():
     subprogramDeclaration()
     lexical_item = lexical_dict[current_id]
-    print(lexical_item)
     if (lexical_item['Token'] == ';'):
         lexical_item = next()
         subprogramsDeclarationsLine()
     else:
-        raise Exception('Error: Esperando ; veio: ' +
-                        lexical_item['Token'])
+        pass
 
 
 def subprogramsDeclarations():
@@ -363,7 +364,6 @@ def listVariableDeclarationsLine():
 def listVariableDeclarations():
     listOfIdentifiers()
     lexical_item = lexical_dict[current_id]
-    # print(lexical_item)
     if (lexical_item['Token'] == ':'):
         lexical_item = next()
         type()
@@ -403,7 +403,8 @@ def program():
                 subprogramsDeclarations()
                 # always get the changes after productions
                 lexical_item = lexical_dict[current_id]
-                # Com_Com()
+                compositeCommand()
+                lexical_item = lexical_dict[current_id]
                 if (lexical_item['Token'] != '.'):
                     raise Exception(
                         'Error: Esperando delimitador "." veio: ' + lexical_item['Token'])
