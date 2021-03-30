@@ -108,6 +108,10 @@ def factor():
 
 def multiplicativeOp():
     lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'and'):
+        lexical_item = next()
+    else:
+        pass
 
 
 def termLine():
@@ -131,6 +135,10 @@ def sign():
 
 def opAdditive():
     lexical_item = lexical_dict[current_id]
+    if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'or'):
+        lexical_item = next()
+    else:
+        pass
 
 
 def simpleExpressionLine():
