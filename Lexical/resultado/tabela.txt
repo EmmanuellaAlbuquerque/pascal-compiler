@@ -1,69 +1,61 @@
 |  Token                         |  Classification                |  Line   |
 ================================================================================
 |  program                       |  Reserved Word                 |  1      |
-|  exProcedure                   |  Identifier                    |  1      |
+|  multiplicative_operators      |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
 |  var                           |  Reserved Word                 |  2      |
 |  a                             |  Identifier                    |  3      |
 |  ,                             |  Delimiter                     |  3      |
 |  b                             |  Identifier                    |  3      |
 |  ,                             |  Delimiter                     |  3      |
-|  c                             |  Identifier                    |  3      |
-|  ,                             |  Delimiter                     |  3      |
-|  min                           |  Identifier                    |  3      |
+|  result                        |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  procedure                     |  Reserved Word                 |  4      |
-|  findMin                       |  Identifier                    |  4      |
-|  (                             |  Delimiter                     |  4      |
-|  x                             |  Identifier                    |  4      |
+|  ttrue                         |  Identifier                    |  4      |
 |  ,                             |  Delimiter                     |  4      |
-|  y                             |  Identifier                    |  4      |
-|  ,                             |  Delimiter                     |  4      |
-|  z                             |  Identifier                    |  4      |
+|  tfalse                        |  Identifier                    |  4      |
 |  :                             |  Delimiter                     |  4      |
-|  integer                       |  Reserved Word                 |  4      |
+|  boolean                       |  Reserved Word                 |  4      |
 |  ;                             |  Delimiter                     |  4      |
-|  var                           |  Reserved Word                 |  4      |
-|  m                             |  Identifier                    |  4      |
-|  :                             |  Delimiter                     |  4      |
-|  integer                       |  Reserved Word                 |  4      |
-|  )                             |  Delimiter                     |  4      |
-|  ;                             |  Delimiter                     |  4      |
-|  (                             |  Delimiter                     |  5      |
-|  *                             |  Multiplicative Operator       |  5      |
-|  Finds                         |  Identifier                    |  5      |
-|  the                           |  Identifier                    |  5      |
-|  minimum                       |  Identifier                    |  5      |
-|  of                            |  Identifier                    |  5      |
-|  the                           |  Identifier                    |  5      |
-|  3                             |  Integer Number                |  5      |
-|  values                        |  Identifier                    |  5      |
-|  *                             |  Multiplicative Operator       |  5      |
-|  )                             |  Delimiter                     |  5      |
-|  begin                         |  Reserved Word                 |  7      |
-|  if                            |  Reserved Word                 |  8      |
-|  x                             |  Identifier                    |  8      |
-|  <                             |  Relational Operator           |  8      |
-|  y                             |  Identifier                    |  8      |
-|  then                          |  Reserved Word                 |  8      |
-|  m                             |  Identifier                    |  9      |
+|  begin                         |  Reserved Word                 |  6      |
+|  a                             |  Identifier                    |  7      |
+|  :=                            |  Assignment Command            |  7      |
+|  20                            |  Integer Number                |  7      |
+|  ;                             |  Delimiter                     |  7      |
+|  b                             |  Identifier                    |  8      |
+|  :=                            |  Assignment Command            |  8      |
+|  50                            |  Integer Number                |  8      |
+|  ;                             |  Delimiter                     |  8      |
+|  ttrue                         |  Identifier                    |  9      |
 |  :=                            |  Assignment Command            |  9      |
-|  x                             |  Identifier                    |  9      |
-|  else                          |  Reserved Word                 |  10     |
-|  m                             |  Identifier                    |  11     |
-|  :=                            |  Assignment Command            |  11     |
-|  y                             |  Identifier                    |  11     |
-|  ;                             |  Delimiter                     |  11     |
-|  if                            |  Reserved Word                 |  13     |
-|  z                             |  Identifier                    |  13     |
-|  <                             |  Relational Operator           |  13     |
-|  m                             |  Identifier                    |  13     |
-|  then                          |  Reserved Word                 |  13     |
-|  m                             |  Identifier                    |  14     |
+|  true                          |  Reserved Word                 |  9      |
+|  ;                             |  Delimiter                     |  9      |
+|  tfalse                        |  Identifier                    |  10     |
+|  :=                            |  Assignment Command            |  10     |
+|  false                         |  Reserved Word                 |  10     |
+|  ;                             |  Delimiter                     |  10     |
+|  result                        |  Identifier                    |  12     |
+|  :=                            |  Assignment Command            |  12     |
+|  a                             |  Identifier                    |  12     |
+|  *                             |  Multiplicative Operator       |  12     |
+|  b                             |  Identifier                    |  12     |
+|  ;                             |  Delimiter                     |  12     |
+|  result                        |  Identifier                    |  14     |
 |  :=                            |  Assignment Command            |  14     |
-|  z                             |  Identifier                    |  14     |
+|  a                             |  Identifier                    |  14     |
+|  /                             |  Multiplicative Operator       |  14     |
+|  b                             |  Identifier                    |  14     |
 |  ;                             |  Delimiter                     |  14     |
-|  end                           |  Reserved Word                 |  15     |
-|  ;                             |  Delimiter                     |  15     |
+|  if                            |  Reserved Word                 |  16     |
+|  (                             |  Delimiter                     |  16     |
+|  ttrue                         |  Identifier                    |  16     |
+|  and                           |  Multiplicative Operator       |  16     |
+|  tfalse                        |  Identifier                    |  16     |
+|  )                             |  Delimiter                     |  16     |
+|  then                          |  Reserved Word                 |  16     |
+|  tresult                       |  Identifier                    |  17     |
+|  :=                            |  Assignment Command            |  17     |
+|  true                          |  Reserved Word                 |  17     |
+|  end                           |  Reserved Word                 |  18     |
+|  .                             |  Delimiter                     |  18     |
