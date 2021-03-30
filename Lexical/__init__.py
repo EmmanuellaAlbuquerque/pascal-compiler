@@ -31,8 +31,8 @@ class Lexical:
 
             if (self.current_char == len(self.char_list)):
                 self.switchReservedSymbol()
-                # self.printTable(self.tabela, self.output_list,
-                #                 self.path_directory)
+                self.printTable(self.tabela, self.output_list,
+                                self.path_directory)
                 return self.output_list
 
             if (self.current_state == 0):
@@ -93,7 +93,7 @@ class Lexical:
 
         with open(path_directory + "/resultado/tabela.txt", "w") as file:
             for i in table:
-                print(i)
+                # print(i)
                 file.write(str(i + '\n'))
 
     def switchReservedSymbol(self):

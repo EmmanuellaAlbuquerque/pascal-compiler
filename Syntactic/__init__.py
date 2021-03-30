@@ -87,9 +87,9 @@ def factor():
         factorC()
         lexical_item = lexical_dict[current_id]
     elif (lexical_item['Token'].isdigit()
-          or lexical_item['Token'].isdigit()
+          or lexical_item['Token'].replace(".", "").isdigit()
           or lexical_item['Token'].lower() == 'true'
-          or lexical_item['Token'].lower() == 'false'):
+            or lexical_item['Token'].lower() == 'false'):
         lexical_item = next()
     elif (lexical_item['Token'].lower() == 'not'):
         lexical_item = next()
