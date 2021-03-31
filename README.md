@@ -47,20 +47,20 @@ declarações_variáveis →
 
 {modificado}
 lista_declarações_variáveis →
-  lista_de_identificadores: tipo; lista_declarações_variáveis'
+  lista_de_identificadores: tipo; lista_declarações_variáveis'             '
 
-lista_declarações_variáveis' →
-  lista_de_identificadores: tipo; lista_declarações_variáveis'
+lista_declarações_variáveis' →                                             '
+  lista_de_identificadores: tipo; lista_declarações_variáveis'             '
   | ε
 
 {--------------------------------------------------------------------------}
 
 {modificado}
 lista_de_identificadores →
-  id lista_de_identificadores'
+  id lista_de_identificadores'                                             '
 
-lista_de_identificadores' →
-  , id lista_de_identificadores'
+lista_de_identificadores' →                                                '
+  , id lista_de_identificadores'                                           '
   | ε
 
 {--------------------------------------------------------------------------}
@@ -74,10 +74,10 @@ tipo →
 
 {modificado}
 declarações_de_subprogramas →
-  declarações_de_subprogramas'
+  declarações_de_subprogramas'                                             '
 
-declarações_de_subprogramas' →
-  declaração_de_subprograma; declarações_de_subprogramas'
+declarações_de_subprogramas' →                                             '
+  declaração_de_subprograma; declarações_de_subprogramas'                  '
   | ε
 
 {--------------------------------------------------------------------------}
@@ -98,10 +98,10 @@ argumentos →
 
 {modificado}
 lista_de_parametros →
-  lista_de_identificadores: tipo lista_de_parametros'
+  lista_de_identificadores: tipo lista_de_parametros'                      '
 
-lista_de_parametros' →
-  ; lista_de_identificadores: tipo lista_de_parametros'
+lista_de_parametros' →                                                     '
+  ; lista_de_identificadores: tipo lista_de_parametros'                    '
 
 {--------------------------------------------------------------------------}
 
@@ -120,11 +120,11 @@ comandos_opcionais →
 
 {modificado}
 lista_de_comandos →
-  comando lista_de_comandos'
+  comando lista_de_comandos'                                               '
   
 
-lista_de_comandos' →
-  ; comando lista_de_comandos'
+lista_de_comandos' →                                                       '
+  ; comando lista_de_comandos'                                             '
   | ε
 
 {--------------------------------------------------------------------------}
@@ -161,10 +161,10 @@ ativação_de_procedimentoC →
 
 {modificado}
 lista_de_expressões →
-  expressão lista_de_expressões'
+  expressão lista_de_expressões'                                           '
 
-lista_de_expressões' →
-  , expressão lista_de_expressões'
+lista_de_expressões' →                                                     '
+  , expressão lista_de_expressões'                                         '
   | ε
 
 {--------------------------------------------------------------------------}
@@ -181,20 +181,37 @@ expressãoC →
 
 {modificado}
 expressão_simples →
-  termo expressão_simples'
+  termo expressão_simples'                                                 '
 
-expressão_simples' →
-  op_aditivo termo expressão_simples'
+expressão_simples' →                                                       '
+  op_aditivo termo expressão_simples'                                      '
   | ε
 
 {--------------------------------------------------------------------------}
 
 {modificado}
 termo →
-  fator termo'
+  fator termo'                                                             '
 
-termo' →
-  op_multiplicativo fator termo'
+termo' →                                                                   '
+  op_multiplicativo fator termo'                                           '
   | ε
+
+{--------------------------------------------------------------------------}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
