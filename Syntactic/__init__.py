@@ -108,21 +108,23 @@ def factor():
 
 def multiplicativeOp():
     lexical_item = lexical_dict[current_id]
-    if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'and'):
+    if (lexical_item['Token'] == '*' or lexical_item['Token'] == '/' or lexical_item['Token'].lower() == 'and'):
         lexical_item = next()
     else:
         pass
 
 
 def termLine():
-    multiplicativeOp()
-    factor()
-    termLine()
+    lexical_item = lexical_dict[current_id]
+    if (lexical_item['Classification'] == 'Multiplicative Operator'):
+        multiplicativeOp()
+        factor()
+        termLine()
 
 
 def term():
     factor()
-    # termLine()
+    termLine()
 
 
 def sign():
@@ -250,13 +252,19 @@ def command():
 
 def commandsListLine():
     lexical_item = lexical_dict[current_id]
-    if (lexical_item['Token'].lower() == ';'):
+    if (lexical_item['Token'] == ';'):
         lexical_item = next()
         command()
+        commandsListLine()
     else:
-        # pass
-        raise Exception('Error at ' + str(lexical_item['Line']) + ' esperando ";" veio: ' +
-                        lexical_item['Token'])
+        lexical_item = lexical_dict[current_id]
+        if (lexical_item['Token'].lower() == 'end'):
+            lexical_item = lexical_dict[current_id]
+        else:
+            lexical_item = lexical_dict[current_id - 1]
+            print(lexical_item)
+            raise Exception('Error at ' + str(lexical_item['Line']) + ' esperando ";" veio: ' +
+                            lexical_item['Token'])
 
 
 def commandsList():

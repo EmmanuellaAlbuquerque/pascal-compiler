@@ -16,10 +16,16 @@
 |  valor1                        |  Identifier                    |  6      |
 |  :=                            |  Assignment Command            |  6      |
 |  10                            |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  2                             |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  3                             |  Integer Number                |  6      |
 |  ;                             |  Delimiter                     |  6      |
 |  valor2                        |  Identifier                    |  7      |
 |  :=                            |  Assignment Command            |  7      |
 |  10.5                          |  Real Number                   |  7      |
+|  /                             |  Multiplicative Operator       |  7      |
+|  1                             |  Integer Number                |  7      |
 |  ;                             |  Delimiter                     |  7      |
 |  end                           |  Reserved Word                 |  8      |
 |  .                             |  Delimiter                     |  8      |
