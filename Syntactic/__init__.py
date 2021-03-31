@@ -22,7 +22,7 @@ def type():
             'Error: tipo inválido: ' + lexical_item['Token'])
 
 
-def listOfParameters2():
+def listOfParametersLine():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == ';'):
         lexical_item = next()
@@ -35,7 +35,7 @@ def listOfParameters():
     if (lexical_item['Token'] == ':'):
         lexical_item = next()
         type()
-        listOfParameters2()
+        listOfParametersLine()
     else:
         raise Exception('Error: Esperando delimitador ":" veio: ' +
                         lexical_item['Token'])
@@ -330,13 +330,13 @@ def subprogramsDeclarations():
         pass
 
 
-def listOfIdentifiers2():
+def listOfIdentifiersLine():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == ','):
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
             lexical_item = next()
-            listOfIdentifiers2()
+            listOfIdentifiersLine()
         else:
             raise Exception(
                 'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
@@ -348,7 +348,7 @@ def listOfIdentifiers():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
         lexical_item = next()
-        listOfIdentifiers2()
+        listOfIdentifiersLine()
     else:
         raise Exception(
             'Error: sintático, esperando um identificador veio: ' + lexical_item['Classification'])
