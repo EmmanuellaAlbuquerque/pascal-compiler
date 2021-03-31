@@ -1,69 +1,31 @@
 |  Token                         |  Classification                |  Line   |
 ================================================================================
 |  program                       |  Reserved Word                 |  1      |
-|  exProcedure                   |  Identifier                    |  1      |
+|  teste                         |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
 |  var                           |  Reserved Word                 |  2      |
-|  a                             |  Identifier                    |  3      |
-|  ,                             |  Delimiter                     |  3      |
-|  b                             |  Identifier                    |  3      |
-|  ,                             |  Delimiter                     |  3      |
-|  c                             |  Identifier                    |  3      |
-|  ,                             |  Delimiter                     |  3      |
-|  min                           |  Identifier                    |  3      |
+|  valor1                        |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  procedure                     |  Reserved Word                 |  4      |
-|  findMin                       |  Identifier                    |  4      |
-|  (                             |  Delimiter                     |  4      |
-|  x                             |  Identifier                    |  4      |
-|  ,                             |  Delimiter                     |  4      |
-|  y                             |  Identifier                    |  4      |
-|  ,                             |  Delimiter                     |  4      |
-|  z                             |  Identifier                    |  4      |
+|  valor2                        |  Identifier                    |  4      |
 |  :                             |  Delimiter                     |  4      |
-|  integer                       |  Reserved Word                 |  4      |
+|  real                          |  Reserved Word                 |  4      |
 |  ;                             |  Delimiter                     |  4      |
-|  var                           |  Reserved Word                 |  4      |
-|  m                             |  Identifier                    |  4      |
-|  :                             |  Delimiter                     |  4      |
-|  integer                       |  Reserved Word                 |  4      |
-|  )                             |  Delimiter                     |  4      |
-|  ;                             |  Delimiter                     |  4      |
-|  (                             |  Delimiter                     |  5      |
-|  *                             |  Multiplicative Operator       |  5      |
-|  Finds                         |  Identifier                    |  5      |
-|  the                           |  Identifier                    |  5      |
-|  minimum                       |  Identifier                    |  5      |
-|  of                            |  Identifier                    |  5      |
-|  the                           |  Identifier                    |  5      |
-|  3                             |  Integer Number                |  5      |
-|  values                        |  Identifier                    |  5      |
-|  *                             |  Multiplicative Operator       |  5      |
-|  )                             |  Delimiter                     |  5      |
-|  begin                         |  Reserved Word                 |  7      |
-|  if                            |  Reserved Word                 |  8      |
-|  x                             |  Identifier                    |  8      |
-|  <                             |  Relational Operator           |  8      |
-|  y                             |  Identifier                    |  8      |
-|  then                          |  Reserved Word                 |  8      |
-|  m                             |  Identifier                    |  9      |
-|  :=                            |  Assignment Command            |  9      |
-|  x                             |  Identifier                    |  9      |
-|  else                          |  Reserved Word                 |  10     |
-|  m                             |  Identifier                    |  11     |
-|  :=                            |  Assignment Command            |  11     |
-|  y                             |  Identifier                    |  11     |
-|  ;                             |  Delimiter                     |  11     |
-|  if                            |  Reserved Word                 |  13     |
-|  z                             |  Identifier                    |  13     |
-|  <                             |  Relational Operator           |  13     |
-|  m                             |  Identifier                    |  13     |
-|  then                          |  Reserved Word                 |  13     |
-|  m                             |  Identifier                    |  14     |
-|  :=                            |  Assignment Command            |  14     |
-|  z                             |  Identifier                    |  14     |
-|  ;                             |  Delimiter                     |  14     |
-|  end                           |  Reserved Word                 |  15     |
-|  ;                             |  Delimiter                     |  15     |
+|  begin                         |  Reserved Word                 |  5      |
+|  valor1                        |  Identifier                    |  6      |
+|  :=                            |  Assignment Command            |  6      |
+|  10                            |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  2                             |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  3                             |  Integer Number                |  6      |
+|  ;                             |  Delimiter                     |  6      |
+|  valor2                        |  Identifier                    |  7      |
+|  :=                            |  Assignment Command            |  7      |
+|  10.5                          |  Real Number                   |  7      |
+|  /                             |  Multiplicative Operator       |  7      |
+|  1                             |  Integer Number                |  7      |
+|  ;                             |  Delimiter                     |  7      |
+|  end                           |  Reserved Word                 |  8      |
+|  .                             |  Delimiter                     |  8      |
