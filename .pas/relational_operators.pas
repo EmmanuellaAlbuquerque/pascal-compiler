@@ -8,20 +8,20 @@ Begin
    b := 10;
    
    if a = b then
-      result:=true
+      result := true;
    
    if  a < b then
-      result:=true
+      result := true;
 
    if  a > b then
-      result:=true
+      result := true;
    
    if ( a <= b ) then
-      result:=true
+      result := true;
    
    if ( b >= a ) then
-      result:=true
+      result := true;
          
    if ( a <> b ) then
-      result:=true
+      result := true;
 End.

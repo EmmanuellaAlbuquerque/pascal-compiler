@@ -6,10 +6,10 @@ ttrue, tfalse, tresult: boolean;
 begin
    a := 20;
    b := 50;
-   ttrue := true;
+   ttrue := not true;
    tfalse := false;
 
-   result := a + b - b;
+   result := (a * b - b);
 
    result := a - b;
 

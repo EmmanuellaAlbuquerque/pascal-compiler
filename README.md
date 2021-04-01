@@ -102,6 +102,7 @@ lista_de_parametros →
 
 lista_de_parametros' →                                                     '
   ; lista_de_identificadores: tipo lista_de_parametros'                    '
+  | ε
 
 {--------------------------------------------------------------------------}
 
@@ -184,7 +185,8 @@ expressão_simples →
   termo expressão_simples'                                                 '
 
 expressão_simples' →                                                       '
-  op_aditivo termo expressão_simples'                                      '
+  sinal termo expressão_simples'                                           '
+  | op_aditivo termo expressão_simples'                                    '
   | ε
 
 {--------------------------------------------------------------------------}
