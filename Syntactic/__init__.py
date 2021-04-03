@@ -50,8 +50,7 @@ def sign():
     if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-'):
         lexical_item = next()
     else:
-        raise Exception('Error: Esperando signal veio: ' +
-                        lexical_item['Token'] + ' in line ' + str(lexical_item['Line']))
+        pass
 
 
 def factorC():
@@ -125,6 +124,7 @@ def simpleExpressionLine():
 
 
 def simpleExpression():
+    sign()
     term()
     simpleExpressionLine()
 
