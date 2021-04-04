@@ -1,31 +1,31 @@
 # Analisador Léxico
 
-- [ ] Tabela de símbolos com os seguintes elementos: 
-a. Token
-b. Tipo de Token
-c. Linha correspondente a posição do token
+- [ ] Tabela de símbolos com os seguintes elementos: <br>
+a. Token <br>
+b. Tipo de Token <br>
+c. Linha correspondente a posição do token <br>
 
-- [ ] Não considerar
-a. Espaços em branco
-b. Caracteres formatadores (tabulação, nova linha, novo parágrafo)
-c. Contagem de linhas
+- [ ] Não considerar <br>
+a. Espaços em branco <br>
+b. Caracteres formatadores (tabulação, nova linha, novo parágrafo) <br>
+c. Contagem de linhas <br>
 
 - [ ] Comentários {}
 
-- [ ] Tokens considerados
-a. Palavras Chaves
-b. Identificadores aZ, 0-9, _
-c. Números inteiros [0..9]+
-d. Números reais ([0..9]+.[0..9]*)
-e. Delimitadores ; . : ( ) ,
-f. Comando de atribuição :=
-e. Operadores relacionais = < > <= >= <>
-g. Operadores aditivos + - or
-h. Operadores multiplicativos * / and
+- [ ] Tokens considerados <br>
+a. Palavras Chaves <br>
+b. Identificadores aZ, 0-9, _ <br>
+c. Números inteiros [0..9]+ <br>
+d. Números reais ([0..9]+.[0..9]*) <br>
+e. Delimitadores ; . : ( ) , <br>
+f. Comando de atribuição := <br>
+e. Operadores relacionais = < > <= >= <> <br>
+g. Operadores aditivos + - or <br>
+h. Operadores multiplicativos * / and <br>
 
-- [ ] Detecção de erros
-a. Comentário aberto e não fechado;
-b. Símbolos não pertencentes a linguagem.
+- [ ] Detecção de erros <br>
+a. Comentário aberto e não fechado; <br>
+b. Símbolos não pertencentes a linguagem. <br>
 
 # Analisador Sintático
 ## Método Top-Down com análise preditiva recursiva direta
