@@ -8,6 +8,12 @@ lexical_dict = dict()
 def next():
     global current_id, lexical_dict
     current_id += 1
+    if (current_id >= len(lexical_dict)):
+        lexical_item = lexical_dict[current_id - 1]
+        raise Exception('next, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting "next" but came: '
+                        + '"'
+                        + 'anything' + '"')
     return lexical_dict[current_id]
 
 
@@ -15,20 +21,12 @@ def multiplicativeOp():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == '*' or lexical_item['Token'] == '/' or lexical_item['Token'].lower() == 'and'):
         lexical_item = next()
-    else:
-        lexical_item = lexical_dict[current_id]
-        raise Exception('Error: Esperando multiplicativeOp veio: ' +
-                        lexical_item['Token'] + ' in line ' + str(lexical_item['Line']))
 
 
 def AdditiveOp():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'or'):
         lexical_item = next()
-    else:
-        lexical_item = lexical_dict[current_id]
-        raise Exception('Error: Esperando opAdditive veio: ' +
-                        lexical_item['Token'] + ' in line ' + str(lexical_item['Line']))
 
 
 def relationalOp():
@@ -40,9 +38,6 @@ def relationalOp():
             or lexical_item['Token'] == '>='
             or lexical_item['Token'] == '<>'):
         lexical_item = next()
-    else:
-        raise Exception('Error: Esperando Relational Operator veio: ' +
-                        lexical_item['Classification'])
 
 
 def sign():
@@ -62,8 +57,11 @@ def factorC():
         if (lexical_item['Token'].lower() == ')'):
             lexical_item = next()
         else:
-            raise Exception('Error: Esperando ")" veio: ' +
-                            lexical_item['Token'])
+            lexical_item = lexical_dict[current_id]
+            raise Exception('factorC, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ")" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
         pass
 
@@ -90,12 +88,17 @@ def factor():
         if (lexical_item['Token'].lower() == ')'):
             lexical_item = next()
         else:
-            raise Exception('Error at factor Esperando ")" veio: ' +
-                            lexical_item['Token'])
+            lexical_item = lexical_dict[current_id]
+            raise Exception('factor, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ")" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
         lexical_item = lexical_dict[current_id]
-        raise Exception('Error: Esperando factor veio: ' +
-                        lexical_item['Token'] + ' in line ' + str(lexical_item['Line']))
+        raise Exception('factor, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting "factor item" but came: '
+                        + '"'
+                        + lexical_item['Token'] + '"')
 
 
 def termLine():
@@ -167,8 +170,10 @@ def procedureActivationC():
         if (lexical_item['Token'].lower() == ')'):
             lexical_item = next()
         else:
-            raise Exception('Error: Esperando ")" veio: ' +
-                            lexical_item['Token'])
+            raise Exception('procedureActivationC, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ")" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
         pass
 
@@ -220,8 +225,11 @@ def command():
             partElse()
             return
         else:
-            raise Exception('Error: Esperando "then" veio: ' +
-                            lexical_item['Token'])
+            lexical_item = lexical_dict[current_id]
+            raise Exception('command, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting "then" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'while'):
         lexical_item = next()
@@ -232,8 +240,11 @@ def command():
             command()
             return
         else:
-            raise Exception('Error: Esperando "do" veio: ' +
-                            lexical_item['Token'])
+            lexical_item = lexical_dict[current_id]
+            raise Exception('command, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting "do" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     compositeCommand()
 
 
@@ -248,9 +259,11 @@ def commandsListLine():
         if (lexical_item['Token'].lower() == 'end'):
             lexical_item = lexical_dict[current_id]
         else:
-            lexical_item = lexical_dict[current_id - 1]
-            raise Exception('Error at ' + str(lexical_item['Line'] - 1) + ' esperando ";" veio: ' +
-                            lexical_item['Token'])
+            lexical_item = lexical_dict[current_id]
+            raise Exception('commandsListLine, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ";" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
 
 
 def commandsList():
@@ -271,8 +284,10 @@ def compositeCommand():
         if (lexical_item['Token'].lower() == 'end'):
             lexical_item = next()
         else:
-            raise Exception('Error in line ' + str(lexical_item['Line']) + ' esperando o fechamento do comando composto "end", veio: ' +
-                            lexical_item['Token'])
+            raise Exception('compositeCommand, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting closing the composite command "end" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
 
 
 def listOfParametersLine():
@@ -290,8 +305,10 @@ def listOfParameters():
         type()
         listOfParametersLine()
     else:
-        raise Exception('Error: Esperando delimitador ":" veio: ' +
-                        lexical_item['Token'])
+        raise Exception('listOfParameters, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting ":" but came: '
+                        + '"'
+                        + lexical_item['Token'] + '"')
 
 
 def arguments():
@@ -303,8 +320,10 @@ def arguments():
         if (lexical_item['Token'].lower() == ')'):
             lexical_item = next()
         else:
-            raise Exception('Error: Esperando ")" veio: ' +
-                            lexical_item['Token'])
+            raise Exception('arguments, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ")" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
         pass
 
@@ -323,11 +342,15 @@ def subprogramDeclaration():
                 subprogramsDeclarations()
                 compositeCommand()
             else:
-                raise Exception('Error: Esperando ; veio: ' +
-                                lexical_item['Token'])
+                raise Exception('subprogramDeclaration, in line ' + str(lexical_item['Line']) + ' \n'
+                                + 'error, waiting ";" but came: '
+                                + '"'
+                                + lexical_item['Token'] + '"')
         else:
-            raise Exception(
-                'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
+            raise Exception('subprogramDeclaration, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting "Identifier" but came: '
+                            + '"'
+                            + lexical_item['Classification'] + '"')
     else:
         pass
 
@@ -341,7 +364,7 @@ def subprogramsDeclarationsLine():
             lexical_item = next()
             subprogramsDeclarationsLine()
         else:
-            raise Exception('line ' + str(lexical_item['Line']) + ' \n'
+            raise Exception('subprogramsDeclarationsLine in line ' + str(lexical_item['Line']) + ' \n'
                             + 'error, end of procedure declaration: waiting ";" but came: '
                             + '"'
                             + lexical_item['Token'] + '"')
@@ -360,8 +383,10 @@ def type():
             or lexical_item['Token'].lower() == 'boolean'):
         lexical_item = next()
     else:
-        raise Exception(
-            'Error: tipo inválido: ' + lexical_item['Token'])
+        raise Exception('type, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, invalid type: '
+                        + '"'
+                        + lexical_item['Token'] + '"')
 
 
 def listOfIdentifiersLine():
@@ -372,8 +397,10 @@ def listOfIdentifiersLine():
             lexical_item = next()
             listOfIdentifiersLine()
         else:
-            raise Exception(
-                'Error: sintático, esperando um identificador veio: ' + lexical_item['Token'])
+            raise Exception('listOfIdentifiersLine, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting "Identifier" but came: '
+                            + '"'
+                            + lexical_item['Classification'] + '"')
     else:
         pass
 
@@ -384,8 +411,10 @@ def listOfIdentifiers():
         lexical_item = next()
         listOfIdentifiersLine()
     else:
-        raise Exception(
-            'Error: sintático, esperando um identificador veio: ' + lexical_item['Classification'])
+        raise Exception('listOfIdentifiers, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting "Identifier" but came: '
+                        + '"'
+                        + lexical_item['Classification'] + '"')
 
 
 def listVariableDeclarationsLine():
@@ -402,11 +431,15 @@ def listVariableDeclarationsLine():
                 lexical_item = next()
                 listVariableDeclarationsLine()
             else:
-                raise Exception('Error: Esperando ; veio: ' +
-                                lexical_item['Token'])
+                raise Exception('listVariableDeclarationsLine, in line ' + str(lexical_item['Line']) + ' \n'
+                                + 'error, waiting ";" but came: '
+                                + '"'
+                                + lexical_item['Token'] + '"')
         else:
-            raise Exception('Error: Esperando delimitador ":" veio: ' +
-                            lexical_item['Token'])
+            raise Exception('listVariableDeclarationsLine, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ":" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
         pass
 
@@ -423,11 +456,15 @@ def listVariableDeclarations():
             lexical_item = next()
             listVariableDeclarationsLine()
         else:
-            raise Exception('Error in listVariableDeclarations: Esperando ; veio: ' +
-                            lexical_item['Token'])
+            raise Exception('listVariableDeclarations, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting ";" but came: '
+                            + '"'
+                            + lexical_item['Token'] + '"')
     else:
-        raise Exception('Error in listVariableDeclarations: Esperando delimitador ":" veio: ' +
-                        lexical_item['Token'])
+        raise Exception('listVariableDeclarations, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting ":" but came: '
+                        + '"'
+                        + lexical_item['Token'] + '"')
 
 
 def variableDeclarations():
@@ -453,21 +490,31 @@ def program():
                 # always get the changes after productions
                 lexical_item = lexical_dict[current_id]
                 if (lexical_item['Token'] != '.'):
-                    raise Exception(
-                        'Error: Esperando delimitador "." veio: ' + lexical_item['Token'])
+                    raise Exception('program, in line ' + str(lexical_item['Line']) + ' \n'
+                                    + 'error, waiting "." but came: '
+                                    + '"'
+                                    + lexical_item['Token'] + '"')
+
             else:
-                raise Exception('Error: Esperando ; veio: ' +
-                                lexical_item['Token'])
+                raise Exception('program, in line ' + str(lexical_item['Line']) + ' \n'
+                                + 'error, waiting ";" but came: '
+                                + '"'
+                                + lexical_item['Token'] + '"')
         else:
-            raise Exception(
-                'Error: sintático, esperando um identificador veio: ' + lexical_item['Classification'])
+            raise Exception('program, in line ' + str(lexical_item['Line']) + ' \n'
+                            + 'error, waiting "Identifier" but came: '
+                            + '"'
+                            + lexical_item['Classification'] + '"')
+
     else:
-        raise Exception(
-            'Error: Esperando palavra reservada program, veio: ' + lexical_item['Token'])
+        raise Exception('program, in line ' + str(lexical_item['Line']) + ' \n'
+                        + 'error, waiting "program" but came: '
+                        + '"'
+                        + lexical_item['Token'] + '"')
 
 
 def runSyntacticAnalysis(current_dict):
     global current_id, lexical_dict
     lexical_dict = current_dict
     program()
-    print('OK. Syntactic Analysis SUCCESS finished!')
+    print('Syntactic Analysis SUCCESS! finished!')

@@ -1,4 +1,4 @@
-program additive_operators;
+program factor;
 var
 a,b,result : integer;
 ttrue, tfalse, tresult: boolean;
