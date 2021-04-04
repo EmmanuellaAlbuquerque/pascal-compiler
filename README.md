@@ -1,20 +1,20 @@
 # Analisador Léxico
 
-- [ ] Tabela de símbolos com os seguintes elementos: <br>
+- [x] Tabela de símbolos com os seguintes elementos: <br>
 a. Token <br>
 b. Tipo de Token <br>
 c. Linha correspondente a posição do token <br>
 
-- [ ] Não considerar <br>
+- [x] Não considerar <br>
 a. Espaços em branco <br>
 b. Caracteres formatadores (tabulação, nova linha, novo parágrafo) <br>
 c. Contagem de linhas <br>
 
-- [ ] Comentários {}
+- [x] Comentários {}
 
-- [ ] Tokens considerados <br>
+- [x] Tokens considerados <br>
 a. Palavras Chaves <br>
-b. Identificadores aZ, 0-9, _ <br>
+b. Identificadores [a..Z]+ [a..Z]* [0..9]* [_]* <br>
 c. Números inteiros [0..9]+ <br>
 d. Números reais ([0..9]+.[0..9]*) <br>
 e. Delimitadores ; . : ( ) , <br>
@@ -23,7 +23,7 @@ e. Operadores relacionais = < > <= >= <> <br>
 g. Operadores aditivos + - or <br>
 h. Operadores multiplicativos * / and <br>
 
-- [ ] Detecção de erros <br>
+- [x] Detecção de erros <br>
 a. Comentário aberto e não fechado; <br>
 b. Símbolos não pertencentes a linguagem. <br>
 
@@ -31,9 +31,9 @@ b. Símbolos não pertencentes a linguagem. <br>
 ## Método Top-Down com análise preditiva recursiva direta
 
 ### Eliminar:
-- [ ] recursão a esquerda
+- [x] recursão a esquerda
 - [x] recursão da linguagem
-- [ ] não determinismo
+- [x] não determinismo
 
 ### Produções e mudanças
 
