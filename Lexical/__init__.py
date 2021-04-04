@@ -1,5 +1,7 @@
 import os.path
 import re
+import sys
+sys.tracebacklimit = 0
 
 
 class Lexical:
@@ -93,7 +95,7 @@ class Lexical:
 
         with open(path_directory + "/resultado/tabela.txt", "w") as file:
             for i in table:
-                print(i)
+                # print(i)
                 file.write(str(i + '\n'))
 
     def switchReservedSymbol(self):
@@ -149,8 +151,8 @@ class Lexical:
             self.addToken(self.char_list[self.current_char],
                           'Multiplicative Operator', self.line_counter)
         else:
-            print('error<Unknown Symbol>: ' +
-                  self.char_list[self.current_char])
+            raise Exception('in line ' + str(self.line_counter) + '. error<Unknown Symbol>: ' +
+                            self.char_list[self.current_char])
 
     def switchToQ1(self):
 
@@ -206,7 +208,8 @@ class Lexical:
             self.current_state = 0
             self.token = ''
         elif (self.current_char == (len(self.char_list) - 1)):
-            print('error<comment>: Open and not Closed comment')
+            raise Exception('in line ' + str(self.line_counter) +
+                            '. error<comment>: Open and not Closed comment')
         elif (self.char_list[self.current_char] == '\n'):
             self.line_counter += 1
 
