@@ -8,9 +8,9 @@ c. Linha correspondente a posição do token <br>
 - [x] Não considerar <br>
 a. Espaços em branco <br>
 b. Caracteres formatadores (tabulação, nova linha, novo parágrafo) <br>
-c. Contagem de linhas <br>
 
-- [x] Comentários {}
+- [x] Comentários {} <br>
+a. Contagem de linhas <br>
 
 - [x] Tokens considerados <br>
 a. Palavras Chaves <br>

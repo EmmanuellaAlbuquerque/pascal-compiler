@@ -93,7 +93,7 @@ class Lexical:
 
         with open(path_directory + "/resultado/tabela.txt", "w") as file:
             for i in table:
-                # print(i)
+                print(i)
                 file.write(str(i + '\n'))
 
     def switchReservedSymbol(self):

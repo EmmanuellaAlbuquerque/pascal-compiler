@@ -1,8 +1,7 @@
-program teste;
+program teste; {programa exemplo}
 var
-  valor_1: integer;
-  vAlorDois: real;
+  valor1: integer;
+  valor2: real;
 begin
-  valor_1 := 10 * 2 * 3;
-  vAlorDois := 10.5 / 1;
+  valor1 := 10;
 end.

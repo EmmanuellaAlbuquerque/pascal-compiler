@@ -4,28 +4,18 @@
 |  teste                         |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
 |  var                           |  Reserved Word                 |  2      |
-|  valor_1                       |  Identifier                    |  3      |
+|  valor1                        |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  vAlorDois                     |  Identifier                    |  4      |
+|  valor2                        |  Identifier                    |  4      |
 |  :                             |  Delimiter                     |  4      |
 |  real                          |  Reserved Word                 |  4      |
 |  ;                             |  Delimiter                     |  4      |
 |  begin                         |  Reserved Word                 |  5      |
-|  valor_1                       |  Identifier                    |  6      |
+|  valor1                        |  Identifier                    |  6      |
 |  :=                            |  Assignment Command            |  6      |
 |  10                            |  Integer Number                |  6      |
-|  *                             |  Multiplicative Operator       |  6      |
-|  2                             |  Integer Number                |  6      |
-|  *                             |  Multiplicative Operator       |  6      |
-|  3                             |  Integer Number                |  6      |
 |  ;                             |  Delimiter                     |  6      |
-|  vAlorDois                     |  Identifier                    |  7      |
-|  :=                            |  Assignment Command            |  7      |
-|  10.5                          |  Real Number                   |  7      |
-|  /                             |  Multiplicative Operator       |  7      |
-|  1                             |  Integer Number                |  7      |
-|  ;                             |  Delimiter                     |  7      |
-|  end                           |  Reserved Word                 |  8      |
-|  .                             |  Delimiter                     |  8      |
+|  end                           |  Reserved Word                 |  7      |
+|  .                             |  Delimiter                     |  7      |
