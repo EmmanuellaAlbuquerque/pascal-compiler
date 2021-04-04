@@ -1,25 +1,31 @@
 |  Token                         |  Classification                |  Line   |
 ================================================================================
 |  program                       |  Reserved Word                 |  1      |
-|  signal                        |  Identifier                    |  1      |
+|  teste                         |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
 |  var                           |  Reserved Word                 |  2      |
-|  valor1                        |  Identifier                    |  3      |
+|  valor_1                       |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  begin                         |  Reserved Word                 |  4      |
-|  valor1                        |  Identifier                    |  5      |
-|  :=                            |  Assignment Command            |  5      |
-|  (                             |  Delimiter                     |  5      |
-|  -                             |  Additive Operator             |  5      |
-|  10                            |  Integer Number                |  5      |
-|  )                             |  Delimiter                     |  5      |
-|  +                             |  Additive Operator             |  5      |
-|  (                             |  Delimiter                     |  5      |
-|  -                             |  Additive Operator             |  5      |
-|  120                           |  Integer Number                |  5      |
-|  )                             |  Delimiter                     |  5      |
-|  ;                             |  Delimiter                     |  5      |
-|  end                           |  Reserved Word                 |  6      |
-|  .                             |  Delimiter                     |  6      |
+|  vAlorDois                     |  Identifier                    |  4      |
+|  :                             |  Delimiter                     |  4      |
+|  real                          |  Reserved Word                 |  4      |
+|  ;                             |  Delimiter                     |  4      |
+|  begin                         |  Reserved Word                 |  5      |
+|  valor_1                       |  Identifier                    |  6      |
+|  :=                            |  Assignment Command            |  6      |
+|  10                            |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  2                             |  Integer Number                |  6      |
+|  *                             |  Multiplicative Operator       |  6      |
+|  3                             |  Integer Number                |  6      |
+|  ;                             |  Delimiter                     |  6      |
+|  vAlorDois                     |  Identifier                    |  7      |
+|  :=                            |  Assignment Command            |  7      |
+|  10.5                          |  Real Number                   |  7      |
+|  /                             |  Multiplicative Operator       |  7      |
+|  1                             |  Integer Number                |  7      |
+|  ;                             |  Delimiter                     |  7      |
+|  end                           |  Reserved Word                 |  8      |
+|  .                             |  Delimiter                     |  8      |

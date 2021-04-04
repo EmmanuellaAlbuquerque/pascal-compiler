@@ -1,7 +1,31 @@
 # Analisador Léxico
 
-...
+- [ ] Tabela de símbolos com os seguintes elementos: 
+a. Token
+b. Tipo de Token
+c. Linha correspondente a posição do token
 
+- [ ] Não considerar
+a. Espaços em branco
+b. Caracteres formatadores (tabulação, nova linha, novo parágrafo)
+c. Contagem de linhas
+
+- [ ] Comentários {}
+
+- [ ] Tokens considerados
+a. Palavras Chaves
+b. Identificadores aZ, 0-9, _
+c. Números inteiros [0..9]+
+d. Números reais ([0..9]+.[0..9]*)
+e. Delimitadores ; . : ( ) ,
+f. Comando de atribuição :=
+e. Operadores relacionais = < > <= >= <>
+g. Operadores aditivos + - or
+h. Operadores multiplicativos * / and
+
+- [ ] Detecção de erros
+a. Comentário aberto e não fechado;
+b. Símbolos não pertencentes a linguagem.
 
 # Analisador Sintático
 ## Método Top-Down com análise preditiva recursiva direta
@@ -182,7 +206,7 @@ expressãoC →
 
 {modificado}
 expressão_simples →
-  sinal termo
+  sinal termo expressão_simples'                                           '
   | termo expressão_simples'                                               '
 
 expressão_simples' →                                                       '
