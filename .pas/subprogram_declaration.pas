@@ -1,4 +1,4 @@
-program teste;
+program subprogram_declaration;
 var {-- variableDeclarations}
   valor1: integer;
   valor2: real;

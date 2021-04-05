@@ -8,9 +8,8 @@ Program resultado;
          N3:=4.5;
          S:=N1+N2+N3;
          M:=S/3;
-         If(M>=5)Then
+         If (M>=5) Then
              Result:=True
-             a = 5
          Else
              Result:=False;
      End.

@@ -221,7 +221,7 @@ def command():
         lexical_item = lexical_dict[current_id]
         if (lexical_item['Token'].lower() == 'then'):
             lexical_item = next()
-            command()
+            command()  # or better commandsList()
             partElse()
             return
         else:
@@ -255,15 +255,7 @@ def commandsListLine():
         command()
         commandsListLine()
     else:
-        lexical_item = lexical_dict[current_id]
-        if (lexical_item['Token'].lower() == 'end'):
-            lexical_item = lexical_dict[current_id]
-        else:
-            lexical_item = lexical_dict[current_id]
-            raise Exception('commandsListLine, in line ' + str(lexical_item['Line']) + ' \n'
-                            + 'error, waiting ";" but came: '
-                            + '"'
-                            + lexical_item['Token'] + '"')
+        pass
 
 
 def commandsList():
