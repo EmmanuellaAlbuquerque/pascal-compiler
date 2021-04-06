@@ -1,3 +1,7 @@
+## Dupla
+Emmanuella Faustino Albuquerque <br>
+Vanessa Gabriele Lima Pessoa <br>
+
 # Analisador Léxico
 
 - [x] Tabela de símbolos com os seguintes elementos: <br>
@@ -14,7 +18,7 @@ a. Contagem de linhas <br>
 
 - [x] Tokens considerados <br>
 a. Palavras Chaves <br>
-b. Identificadores [a..Z]+ [a..Z]* [0..9]* [_]* <br>
+b. Identificadores [a..Z]+ [\w]* <br>
 c. Números inteiros [0..9]+ <br>
 d. Números reais ([0..9]+.[0..9]*) <br>
 e. Delimitadores ; . : ( ) , <br>
