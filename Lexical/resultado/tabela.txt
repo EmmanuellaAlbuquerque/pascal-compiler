@@ -1,88 +1,82 @@
 |  Token                         |  Classification                |  Line   |
 ================================================================================
 |  program                       |  Reserved Word                 |  1      |
-|  subprogram_declaration        |  Identifier                    |  1      |
+|  exProcedure                   |  Identifier                    |  1      |
 |  ;                             |  Delimiter                     |  1      |
 |  var                           |  Reserved Word                 |  2      |
-|  valor1                        |  Identifier                    |  3      |
+|  a                             |  Identifier                    |  3      |
+|  ,                             |  Delimiter                     |  3      |
+|  b                             |  Identifier                    |  3      |
+|  ,                             |  Delimiter                     |  3      |
+|  c                             |  Identifier                    |  3      |
+|  ,                             |  Delimiter                     |  3      |
+|  min                           |  Identifier                    |  3      |
 |  :                             |  Delimiter                     |  3      |
 |  integer                       |  Reserved Word                 |  3      |
 |  ;                             |  Delimiter                     |  3      |
-|  valor2                        |  Identifier                    |  4      |
+|  procedure                     |  Reserved Word                 |  4      |
+|  findMin                       |  Identifier                    |  4      |
+|  (                             |  Delimiter                     |  4      |
+|  x                             |  Identifier                    |  4      |
+|  ,                             |  Delimiter                     |  4      |
+|  y                             |  Identifier                    |  4      |
+|  ,                             |  Delimiter                     |  4      |
+|  z                             |  Identifier                    |  4      |
+|  :                             |  Delimiter                     |  4      |
+|  integer                       |  Reserved Word                 |  4      |
+|  ;                             |  Delimiter                     |  4      |
+|  m                             |  Identifier                    |  4      |
 |  :                             |  Delimiter                     |  4      |
 |  real                          |  Reserved Word                 |  4      |
+|  )                             |  Delimiter                     |  4      |
 |  ;                             |  Delimiter                     |  4      |
-|  procedure                     |  Reserved Word                 |  5      |
-|  argTeste                      |  Identifier                    |  5      |
-|  (                             |  Delimiter                     |  5      |
-|  a                             |  Identifier                    |  5      |
-|  ,                             |  Delimiter                     |  5      |
-|  b                             |  Identifier                    |  5      |
-|  :                             |  Delimiter                     |  5      |
-|  integer                       |  Reserved Word                 |  5      |
-|  ;                             |  Delimiter                     |  5      |
-|  c                             |  Identifier                    |  5      |
-|  ,                             |  Delimiter                     |  5      |
-|  d                             |  Identifier                    |  5      |
-|  :                             |  Delimiter                     |  5      |
-|  real                          |  Reserved Word                 |  5      |
-|  )                             |  Delimiter                     |  5      |
-|  ;                             |  Delimiter                     |  5      |
-|  var                           |  Reserved Word                 |  6      |
-|  afterprocedure1               |  Identifier                    |  7      |
-|  ,                             |  Delimiter                     |  7      |
-|  afterprocedure2               |  Identifier                    |  7      |
-|  :                             |  Delimiter                     |  7      |
-|  integer                       |  Reserved Word                 |  7      |
-|  ;                             |  Delimiter                     |  7      |
-|  afterprocedure3               |  Identifier                    |  8      |
-|  :                             |  Delimiter                     |  8      |
-|  real                          |  Reserved Word                 |  8      |
-|  ;                             |  Delimiter                     |  8      |
-|  procedure                     |  Reserved Word                 |  9      |
-|  argTeste2                     |  Identifier                    |  9      |
-|  (                             |  Delimiter                     |  9      |
-|  e                             |  Identifier                    |  9      |
-|  ,                             |  Delimiter                     |  9      |
-|  f                             |  Identifier                    |  9      |
-|  :                             |  Delimiter                     |  9      |
-|  integer                       |  Reserved Word                 |  9      |
-|  ;                             |  Delimiter                     |  9      |
-|  g                             |  Identifier                    |  9      |
-|  ,                             |  Delimiter                     |  9      |
-|  h                             |  Identifier                    |  9      |
-|  :                             |  Delimiter                     |  9      |
-|  real                          |  Reserved Word                 |  9      |
-|  )                             |  Delimiter                     |  9      |
-|  ;                             |  Delimiter                     |  9      |
-|  begin                         |  Reserved Word                 |  10     |
-|  a                             |  Identifier                    |  11     |
-|  :=                            |  Assignment Command            |  11     |
-|  a                             |  Identifier                    |  11     |
-|  ;                             |  Delimiter                     |  11     |
-|  b                             |  Identifier                    |  12     |
-|  :=                            |  Assignment Command            |  12     |
-|  b                             |  Identifier                    |  12     |
-|  ;                             |  Delimiter                     |  12     |
-|  end                           |  Reserved Word                 |  13     |
+|  begin                         |  Reserved Word                 |  6      |
+|  if                            |  Reserved Word                 |  7      |
+|  (                             |  Delimiter                     |  7      |
+|  x                             |  Identifier                    |  7      |
+|  <                             |  Relational Operator           |  7      |
+|  y                             |  Identifier                    |  7      |
+|  )                             |  Delimiter                     |  7      |
+|  then                          |  Reserved Word                 |  7      |
+|  m                             |  Identifier                    |  8      |
+|  :=                            |  Assignment Command            |  8      |
+|  x                             |  Identifier                    |  8      |
+|  else                          |  Reserved Word                 |  9      |
+|  m                             |  Identifier                    |  10     |
+|  :=                            |  Assignment Command            |  10     |
+|  y                             |  Identifier                    |  10     |
+|  ;                             |  Delimiter                     |  10     |
+|  if                            |  Reserved Word                 |  12     |
+|  (                             |  Delimiter                     |  12     |
+|  z                             |  Identifier                    |  12     |
+|  <                             |  Relational Operator           |  12     |
+|  m                             |  Identifier                    |  12     |
+|  )                             |  Delimiter                     |  12     |
+|  then                          |  Reserved Word                 |  12     |
+|  m                             |  Identifier                    |  13     |
+|  :=                            |  Assignment Command            |  13     |
+|  z                             |  Identifier                    |  13     |
 |  ;                             |  Delimiter                     |  13     |
-|  begin                         |  Reserved Word                 |  14     |
+|  while                         |  Reserved Word                 |  16     |
+|  (                             |  Delimiter                     |  16     |
+|  z                             |  Identifier                    |  16     |
+|  <                             |  Relational Operator           |  16     |
+|  m                             |  Identifier                    |  16     |
+|  )                             |  Delimiter                     |  16     |
+|  do                            |  Reserved Word                 |  16     |
+|  begin                         |  Reserved Word                 |  17     |
+|  m                             |  Identifier                    |  18     |
+|  :=                            |  Assignment Command            |  18     |
+|  z                             |  Identifier                    |  18     |
+|  ;                             |  Delimiter                     |  18     |
 |  end                           |  Reserved Word                 |  19     |
 |  ;                             |  Delimiter                     |  19     |
-|  begin                         |  Reserved Word                 |  20     |
-|  valor1                        |  Identifier                    |  21     |
-|  :=                            |  Assignment Command            |  21     |
-|  10                            |  Integer Number                |  21     |
-|  *                             |  Multiplicative Operator       |  21     |
-|  2                             |  Integer Number                |  21     |
-|  *                             |  Multiplicative Operator       |  21     |
-|  3                             |  Integer Number                |  21     |
-|  ;                             |  Delimiter                     |  21     |
-|  valor2                        |  Identifier                    |  22     |
-|  :=                            |  Assignment Command            |  22     |
-|  10.5                          |  Real Number                   |  22     |
-|  /                             |  Multiplicative Operator       |  22     |
-|  1                             |  Integer Number                |  22     |
-|  ;                             |  Delimiter                     |  22     |
-|  end                           |  Reserved Word                 |  23     |
-|  .                             |  Delimiter                     |  23     |
+|  end                           |  Reserved Word                 |  20     |
+|  ;                             |  Delimiter                     |  20     |
+|  begin                         |  Reserved Word                 |  22     |
+|  m                             |  Identifier                    |  23     |
+|  :=                            |  Assignment Command            |  23     |
+|  z                             |  Identifier                    |  23     |
+|  ;                             |  Delimiter                     |  23     |
+|  end                           |  Reserved Word                 |  24     |
+|  .                             |  Delimiter                     |  24     |

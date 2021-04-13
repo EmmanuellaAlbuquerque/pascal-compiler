@@ -211,8 +211,6 @@ def command():
         if (lexical_item['Token'] == ':='):
             lexical_item = next()
             expression()
-
-            lexical_item = lexical_dict[current_id]
             return
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'if'):
