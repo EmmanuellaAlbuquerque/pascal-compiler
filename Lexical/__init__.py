@@ -9,7 +9,7 @@ class Lexical:
         self.path_directory = os.path.dirname(os.path.abspath(__file__))
 
         self.reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
-                               'else', 'boolean', 'procedure', 'while', 'do', 'not', 'true', 'false')
+                               'else', 'boolean', 'char', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
         file_src = self.path_directory + \
             os.path.join("/../.pas", filename)

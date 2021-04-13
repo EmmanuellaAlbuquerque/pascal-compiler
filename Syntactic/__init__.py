@@ -3,6 +3,58 @@ sys.tracebacklimit = 0
 
 current_id = 0
 lexical_dict = dict()
+declaration_key = 0
+
+
+class SymbolsStack:
+    def __init__(self):
+        self. symbols_stack = list()
+
+    def push(self, tokenItem):
+        i = len(self.symbols_stack) - 1
+        # while didn't reach the end of the scope
+        while (i > 0 and self.symbols_stack[i] != '$'):
+            if (self.symbols_stack[i] == tokenItem['Token']):
+                raise Exception('variable: ' + tokenItem['Token'] +
+                                ' has already been declared')
+            i -= 1
+        self.symbols_stack.append(tokenItem)
+
+    def pop(self):
+        self.symbols_stack.pop(-1)
+
+    def search(self, token):
+        i = len(self.symbols_stack) - 1
+        # while didn't reach the end of the scope
+        while (i >= 0):
+            if (self.symbols_stack[i]['Token'] == token):
+                # return self.symbols_stack[i]
+                return True
+            i -= 1
+        raise Exception('Semantic error, variable: ' +
+                        token + ' used but not declared')
+
+    def closeScope(self):
+        i = len(self.symbols_stack) - 1
+        print('\nscope--------------- before ---------------\n')
+        self.getProgramTokens()
+
+        while (self.symbols_stack[i]['Token'] != '$'):
+            # self.getProgramTokens()
+            self.symbols_stack.pop()
+            i -= 1
+        self.symbols_stack.pop()
+        print('\nscope--------------- after ---------------\n')
+        self.getProgramTokens()
+
+    def getProgramTokens(self):
+        stack = list()
+        for element in self.symbols_stack:
+            stack.append(element['Token'])
+        print(', '.join(stack))
+
+
+symbolsStack = SymbolsStack()
 
 
 def next():
@@ -69,6 +121,12 @@ def factorC():
 def factor():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
+
+        if (declaration_key == 0):
+            symbolsStack.push(lexical_item)
+        else:
+            symbolsStack.search(lexical_item['Token'])
+
         lexical_item = next()
         factorC()
         lexical_item = lexical_dict[current_id]
@@ -181,6 +239,12 @@ def procedureActivationC():
 def procedureActivation():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
+
+        if (declaration_key == 0):
+            symbolsStack.push(lexical_item)
+        else:
+            symbolsStack.search(lexical_item['Token'])
+
         lexical_item = next()
         procedureActivationC()
 
@@ -188,6 +252,12 @@ def procedureActivation():
 def variable():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
+
+        if (declaration_key == 0):
+            symbolsStack.push(lexical_item)
+        else:
+            symbolsStack.search(lexical_item['Token'])
+
         lexical_item = next()
     else:
         pass
@@ -266,12 +336,17 @@ def optionalCommands():
 
 
 def compositeCommand():
+    global declaration_key
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'begin'):
+        declaration_key += 1
         lexical_item = next()
         optionalCommands()
         lexical_item = lexical_dict[current_id]
         if (lexical_item['Token'].lower() == 'end'):
+            declaration_key -= 1
+            if (declaration_key == 0):
+                symbolsStack.closeScope()
             lexical_item = next()
         else:
             raise Exception('compositeCommand, in line ' + str(lexical_item['Line']) + ' \n'
@@ -323,6 +398,14 @@ def subprogramDeclaration():
     if (lexical_item['Token'].lower() == 'procedure'):
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
+
+            if (declaration_key == 0):
+                symbolsStack.push(lexical_item)
+                symbolsStack.push(
+                    {'Token': '$', 'Classification': 'initMark', 'Line': lexical_item['Line']})
+            else:
+                symbolsStack.search(lexical_item['Token'])
+
             lexical_item = next()
             arguments()
             lexical_item = lexical_dict[current_id]
@@ -370,6 +453,7 @@ def type():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'integer'
         or lexical_item['Token'].lower() == 'real'
+        or lexical_item['Token'].lower() == 'char'
             or lexical_item['Token'].lower() == 'boolean'):
         lexical_item = next()
     else:
@@ -384,6 +468,12 @@ def listOfIdentifiersLine():
     if (lexical_item['Token'] == ','):
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
+
+            if (declaration_key == 0):
+                symbolsStack.push(lexical_item)
+            else:
+                symbolsStack.search(lexical_item['Token'])
+
             lexical_item = next()
             listOfIdentifiersLine()
         else:
@@ -398,6 +488,12 @@ def listOfIdentifiersLine():
 def listOfIdentifiers():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
+
+        if (declaration_key == 0):
+            symbolsStack.push(lexical_item)
+        else:
+            symbolsStack.search(lexical_item['Token'])
+
         lexical_item = next()
         listOfIdentifiersLine()
     else:
@@ -469,8 +565,16 @@ def variableDeclarations():
 def program():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'program'):
+        symbolsStack.push(
+            {'Token': '$', 'Classification': 'initMark', 'Line': lexical_item['Line']})
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
+
+            if (declaration_key == 0):
+                symbolsStack.push(lexical_item)
+            else:
+                symbolsStack.search(lexical_item['Token'])
+
             lexical_item = next()
             if (lexical_item['Token'] == ';'):
                 lexical_item = next()
@@ -504,7 +608,8 @@ def program():
 
 
 def runSyntacticAnalysis(current_dict):
-    global current_id, lexical_dict
+    global current_id, lexical_dict, symbolsStack, declaration_key
     lexical_dict = current_dict
+
     program()
     print('Syntactic Analysis SUCCESS! finished!')
