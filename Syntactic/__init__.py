@@ -4,6 +4,8 @@ sys.tracebacklimit = 0
 current_id = 0
 lexical_dict = dict()
 declaration_key = 0
+type_control_stack = list()
+identifier_stack = list()
 
 
 class SymbolsStack:
@@ -25,27 +27,33 @@ class SymbolsStack:
 
     def search(self, token):
         i = len(self.symbols_stack) - 1
+        j = len(type_control_stack) - 1
         # while didn't reach the end of the scope
         while (i >= 0):
             if (self.symbols_stack[i]['Token'] == token):
-                # return self.symbols_stack[i]
+                if ('Type' in self.symbols_stack[i]
+                        and self.symbols_stack[i]['Type'] == 'program'):
+                    raise Exception('Semantic error, in line ' + str(self.symbols_stack[i]['Line']) +
+                                    '. The program name: "' + self.symbols_stack[i]['Token'] +
+                                    '" cannot be used in commands and expressions')
                 return True
             i -= 1
+        symbolsStack.getProgramTokens()
         raise Exception('Semantic error, variable: ' +
                         token + ' used but not declared')
 
     def closeScope(self):
         i = len(self.symbols_stack) - 1
-        print('\nscope--------------- before ---------------\n')
-        self.getProgramTokens()
+        # print('\nscope--------------- before ---------------\n')
+        # self.getProgramTokens()
 
         while (self.symbols_stack[i]['Token'] != '$'):
             # self.getProgramTokens()
             self.symbols_stack.pop()
             i -= 1
         self.symbols_stack.pop()
-        print('\nscope--------------- after ---------------\n')
-        self.getProgramTokens()
+        # print('\nscope--------------- after ---------------\n')
+        # self.getProgramTokens()
 
     def getProgramTokens(self):
         stack = list()
@@ -134,6 +142,8 @@ def factor():
           or lexical_item['Token'].replace(".", "").isdigit()
           or lexical_item['Token'].lower() == 'true'
             or lexical_item['Token'].lower() == 'false'):
+        type_control_stack.append(
+            {'Token': lexical_item['Token'], 'Type': lexical_item['Classification']})
         lexical_item = next()
     elif (lexical_item['Token'].lower() == 'not'):
         lexical_item = next()
@@ -349,6 +359,11 @@ def compositeCommand():
                 symbolsStack.closeScope()
             lexical_item = next()
         else:
+            if (lexical_item['Classification'] == 'Identifier'):
+                raise Exception('compositeCommand, in line ' + str(lexical_item['Line']) + ' \n'
+                                + 'error, waiting ";" but came: '
+                                + '"'
+                                + lexical_item['Token'] + '"')
             raise Exception('compositeCommand, in line ' + str(lexical_item['Line']) + ' \n'
                             + 'error, waiting closing the composite command "end" but came: '
                             + '"'
@@ -455,7 +470,17 @@ def type():
         or lexical_item['Token'].lower() == 'real'
         or lexical_item['Token'].lower() == 'char'
             or lexical_item['Token'].lower() == 'boolean'):
+
+        i = 0
+        # for every identifier you have to save what is its type
+        while (i < len(identifier_stack)):
+            type_control_stack.append(
+                {'Token': identifier_stack[i], 'Type': lexical_item['Token']})
+            i += 1
+        identifier_stack.clear()
+
         lexical_item = next()
+
     else:
         raise Exception('type, in line ' + str(lexical_item['Line']) + ' \n'
                         + 'error, invalid type: '
@@ -471,6 +496,7 @@ def listOfIdentifiersLine():
 
             if (declaration_key == 0):
                 symbolsStack.push(lexical_item)
+                identifier_stack.append(lexical_item['Token'])
             else:
                 symbolsStack.search(lexical_item['Token'])
 
@@ -491,6 +517,7 @@ def listOfIdentifiers():
 
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
+            identifier_stack.append(lexical_item['Token'])
         else:
             symbolsStack.search(lexical_item['Token'])
 
@@ -571,7 +598,10 @@ def program():
         if (lexical_item['Classification'] == 'Identifier'):
 
             if (declaration_key == 0):
+                lexical_item['Type'] = 'program'
                 symbolsStack.push(lexical_item)
+                type_control_stack.append(
+                    {'Token': lexical_item['Token'], 'Type': 'program'})
             else:
                 symbolsStack.search(lexical_item['Token'])
 
@@ -608,8 +638,11 @@ def program():
 
 
 def runSyntacticAnalysis(current_dict):
-    global current_id, lexical_dict, symbolsStack, declaration_key
+    global current_id, lexical_dict, symbolsStack, declaration_key, type_control_stack, identifier_stack
     lexical_dict = current_dict
 
     program()
     print('Syntactic Analysis SUCCESS! finished!')
+
+    for element in type_control_stack:
+        print(element)

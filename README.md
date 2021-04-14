@@ -61,3 +61,9 @@ b. Símbolos não pertencentes a linguagem. <br>
 
 ### Tabela de Símbolos com estrutura de dados destrutiva e com pilha
 
+
+### Verificação de Tipos
+- [ ] Expressões Aritméticas
+- [ ] Comando de Atribuição
+- [ ] Expressões Relacionais
+- [ ] Expressões Lógicas

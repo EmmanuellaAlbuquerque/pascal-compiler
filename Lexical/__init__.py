@@ -106,6 +106,8 @@ class Lexical:
                 item['Classification'] = 'Additive Operator'
             if(item['Token'] == 'and'):
                 item['Classification'] = 'Multiplicative Operator'
+            if(item['Token'].lower() == 'true' or item['Token'].lower() == 'false'):
+                item['Classification'] = 'boolean'
 
     def switchToQ0(self):
 
@@ -179,7 +181,7 @@ class Lexical:
                 self.token += self.char_list[self.current_char]
                 return
             # print('number: ' + token)
-            self.addToken(self.token, 'Integer Number', self.line_counter)
+            self.addToken(self.token, 'integer', self.line_counter)
             self.current_char -= 1
             self.current_state = 0
             self.token = ''
@@ -221,7 +223,7 @@ class Lexical:
             self.token += self.char_list[self.current_char]
         else:
             # print('number: ' + token)
-            self.addToken(self.token, 'Real Number', self.line_counter)
+            self.addToken(self.token, 'real', self.line_counter)
             self.current_char -= 1
             self.current_state = 0
             self.token = ''
