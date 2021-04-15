@@ -30,48 +30,66 @@
 |  integer                       |  Reserved Word                 |  5      |
 |  ;                             |  Delimiter                     |  5      |
 |  begin                         |  Reserved Word                 |  6      |
-|  b                             |  Identifier                    |  7      |
+|  boolean_value                 |  Identifier                    |  7      |
 |  :=                            |  Assignment Command            |  7      |
 |  10                            |  integer                       |  7      |
-|  +                             |  Additive Operator             |  7      |
-|  a                             |  Identifier                    |  7      |
+|  >                             |  Relational Operator           |  7      |
+|  11                            |  integer                       |  7      |
 |  ;                             |  Delimiter                     |  7      |
-|  b                             |  Identifier                    |  8      |
+|  boolean_value                 |  Identifier                    |  8      |
 |  :=                            |  Assignment Command            |  8      |
-|  x                             |  Identifier                    |  8      |
+|  10                            |  integer                       |  8      |
 |  +                             |  Additive Operator             |  8      |
-|  a                             |  Identifier                    |  8      |
+|  15                            |  integer                       |  8      |
+|  >                             |  Relational Operator           |  8      |
+|  11                            |  integer                       |  8      |
+|  +                             |  Additive Operator             |  8      |
+|  20                            |  integer                       |  8      |
 |  ;                             |  Delimiter                     |  8      |
-|  end                           |  Reserved Word                 |  9      |
+|  b                             |  Identifier                    |  9      |
+|  :=                            |  Assignment Command            |  9      |
+|  10                            |  integer                       |  9      |
+|  +                             |  Additive Operator             |  9      |
+|  a                             |  Identifier                    |  9      |
+|  *                             |  Multiplicative Operator       |  9      |
+|  11                            |  integer                       |  9      |
 |  ;                             |  Delimiter                     |  9      |
-|  procedure                     |  Reserved Word                 |  10     |
-|  d                             |  Identifier                    |  10     |
-|  (                             |  Delimiter                     |  10     |
+|  b                             |  Identifier                    |  10     |
+|  :=                            |  Assignment Command            |  10     |
 |  x                             |  Identifier                    |  10     |
-|  :                             |  Delimiter                     |  10     |
-|  integer                       |  Reserved Word                 |  10     |
-|  )                             |  Delimiter                     |  10     |
+|  +                             |  Additive Operator             |  10     |
+|  a                             |  Identifier                    |  10     |
 |  ;                             |  Delimiter                     |  10     |
-|  var                           |  Reserved Word                 |  11     |
-|  h                             |  Identifier                    |  11     |
-|  :                             |  Delimiter                     |  11     |
-|  integer                       |  Reserved Word                 |  11     |
+|  end                           |  Reserved Word                 |  11     |
 |  ;                             |  Delimiter                     |  11     |
-|  begin                         |  Reserved Word                 |  12     |
+|  procedure                     |  Reserved Word                 |  12     |
+|  d                             |  Identifier                    |  12     |
+|  (                             |  Delimiter                     |  12     |
+|  x                             |  Identifier                    |  12     |
+|  :                             |  Delimiter                     |  12     |
+|  integer                       |  Reserved Word                 |  12     |
+|  )                             |  Delimiter                     |  12     |
+|  ;                             |  Delimiter                     |  12     |
+|  var                           |  Reserved Word                 |  13     |
 |  h                             |  Identifier                    |  13     |
-|  :=                            |  Assignment Command            |  13     |
-|  10                            |  integer                       |  13     |
+|  :                             |  Delimiter                     |  13     |
+|  integer                       |  Reserved Word                 |  13     |
 |  ;                             |  Delimiter                     |  13     |
-|  boolean_value                 |  Identifier                    |  14     |
-|  :=                            |  Assignment Command            |  14     |
-|  true                          |  boolean                       |  14     |
-|  ;                             |  Delimiter                     |  14     |
-|  p                             |  Identifier                    |  15     |
-|  (                             |  Delimiter                     |  15     |
+|  begin                         |  Reserved Word                 |  14     |
 |  h                             |  Identifier                    |  15     |
-|  )                             |  Delimiter                     |  15     |
-|  end                           |  Reserved Word                 |  16     |
+|  :=                            |  Assignment Command            |  15     |
+|  10                            |  integer                       |  15     |
+|  ;                             |  Delimiter                     |  15     |
+|  boolean_value                 |  Identifier                    |  16     |
+|  :=                            |  Assignment Command            |  16     |
+|  true                          |  boolean                       |  16     |
 |  ;                             |  Delimiter                     |  16     |
-|  begin                         |  Reserved Word                 |  17     |
-|  end                           |  Reserved Word                 |  19     |
-|  .                             |  Delimiter                     |  19     |
+|  p                             |  Identifier                    |  17     |
+|  (                             |  Delimiter                     |  17     |
+|  h                             |  Identifier                    |  17     |
+|  )                             |  Delimiter                     |  17     |
+|  end                           |  Reserved Word                 |  18     |
+|  ;                             |  Delimiter                     |  18     |
+|  begin                         |  Reserved Word                 |  19     |
+|  end                           |  Reserved Word                 |  21     |
+|  .                             |  Delimiter                     |  21     |

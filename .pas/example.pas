@@ -4,7 +4,9 @@ Program exemplo;
   procedure p (x: integer);
     var b,c: integer;
     begin
-      b := 10 + a;
+      boolean_value := 10 > 11;
+      boolean_value := 10 + 15 > 11 + 20;
+      b := 10 + a * 11;
       b := x + a;
     end;
   procedure d (x: integer);

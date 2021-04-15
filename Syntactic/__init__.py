@@ -25,21 +25,29 @@ class SymbolsStack:
     def pop(self):
         self.symbols_stack.pop(-1)
 
-    def search(self, token):
+    def search(self, tokenItem):
         i = len(self.symbols_stack) - 1
         # while didn't reach the end of the scope
         while (i >= 0):
-            if (self.symbols_stack[i]['Token'] == token):
+            if (self.symbols_stack[i]['Token'] == tokenItem['Token']):
                 if ('Type' in self.symbols_stack[i]
                         and self.symbols_stack[i]['Type'] == 'program'):
                     raise Exception('Semantic error, in line ' + str(self.symbols_stack[i]['Line']) +
                                     '. The program name: "' + self.symbols_stack[i]['Token'] +
                                     '" cannot be used in commands and expressions')
+
+                typeToken = self.symbols_stack[i]
+                typeToken['searchLine'] = tokenItem['Line']
+                type_control_stack.append(typeToken)
+                # print('--------- type control stack ----------')
+                # for element in type_control_stack:
+                #     print(element)
+                # print('---------------------------------------')
                 return True
             i -= 1
         symbolsStack.getProgramTokens()
         raise Exception('Semantic error, variable: ' +
-                        token + ' used but not declared')
+                        tokenItem['Token'] + ' used but not declared')
 
     def closeScope(self):
         i = len(self.symbols_stack) - 1
@@ -70,6 +78,80 @@ class SymbolsStack:
 symbolsStack = SymbolsStack()
 
 
+def updateTCS(type='additiveMultiplicativeOp'):
+    if (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'integer'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'integer'})
+    elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'real'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append({'Token': 'resultType', 'Type': 'real'})
+    elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'real'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append({'Token': 'resultType', 'Type': 'real'})
+    elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'integer'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append({'Token': 'resultType', 'Type': 'real'})
+    elif (type_control_stack[-1]['Type'] == 'boolean' and type_control_stack[-2]['Type'] == 'boolean'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+    elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'procedure'):
+        # updates PCT
+        type_control_stack.pop(-1)
+        type_control_stack.pop(-1)
+
+        if (type == 'relationalOp'):
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
+        else:
+            type_control_stack.append({'Token': 'resultType', 'Type': 'void'})
+    else:
+        line = ''
+        if ('searchLine' in type_control_stack[-2]):
+            line = type_control_stack[-2]['searchLine']
+        raise Exception('in line ' + str(line) + '\n     type1: ' +
+                        str(type_control_stack[-1]['Type']) +
+                        '\n     type2: ' +
+                        str(type_control_stack[-2]['Type']) +
+                        '\n     Type mismatch, Incompatibility of Types')
+
+
 def next():
     global current_id, lexical_dict
     current_id += 1
@@ -93,9 +175,11 @@ def AdditiveOp():
     if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'or'):
         lexical_item = next()
 
+    # print('--------- type control stack ----------')
     # for element in type_control_stack:
     #     print(element)
     # print('---------------------------------------')
+    # exit()
 
 
 def relationalOp():
@@ -139,10 +223,11 @@ def factor():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
 
+        # print('factor' + str(lexical_item))
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
         else:
-            symbolsStack.search(lexical_item['Token'])
+            symbolsStack.search(lexical_item)
 
         lexical_item = next()
         factorC()
@@ -151,8 +236,8 @@ def factor():
           or lexical_item['Token'].replace(".", "").isdigit()
           or lexical_item['Token'].lower() == 'true'
             or lexical_item['Token'].lower() == 'false'):
-        type_control_stack.append(
-            {'Token': lexical_item['Token'], 'Type': lexical_item['Classification']})
+        lexical_item['Type'] = lexical_item['Classification']
+        type_control_stack.append(lexical_item)
         lexical_item = next()
     elif (lexical_item['Token'].lower() == 'not'):
         lexical_item = next()
@@ -183,6 +268,19 @@ def termLine():
     if (lexical_item['Classification'] == 'Multiplicative Operator'):
         multiplicativeOp()
         factor()
+
+        print('--------- type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+
+        updateTCS()
+
+        print('--------- deleted type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+
         termLine()
     else:
         pass
@@ -198,6 +296,19 @@ def simpleExpressionLine():
     if (lexical_item['Classification'] == 'Additive Operator'):
         AdditiveOp()
         term()
+
+        print('--------- type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+
+        updateTCS()
+
+        print('--------- deleted type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+
         simpleExpressionLine()
     else:
         pass
@@ -214,6 +325,14 @@ def expressionC():
     if (lexical_item['Classification'] == 'Relational Operator'):
         relationalOp()
         simpleExpression()
+
+        updateTCS(type='relationalOp')
+
+        print('--------- type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+        # exit()
     else:
         pass
 
@@ -221,6 +340,20 @@ def expressionC():
 def expression():
     simpleExpression()
     expressionC()
+
+    print('--------- type control stack ----------')
+    for element in type_control_stack:
+        print(element)
+    print('---------------------------------------')
+
+    updateTCS()
+
+    print('--------- deleted type control stack ----------')
+    for element in type_control_stack:
+        print(element)
+    print('---------------------------------------')
+
+    # exit()
 
 
 def expressionsListLine():
@@ -262,7 +395,7 @@ def procedureActivation():
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
         else:
-            symbolsStack.search(lexical_item['Token'])
+            symbolsStack.search(lexical_item)
 
         lexical_item = next()
         procedureActivationC()
@@ -275,7 +408,9 @@ def variable():
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
         else:
-            symbolsStack.search(lexical_item['Token'])
+            symbolsStack.search(lexical_item)
+            # print('variable' + str(lexical_item))
+            # print(symbolsStack.getProgramTokens())
 
         lexical_item = next()
     else:
@@ -300,6 +435,7 @@ def command():
         if (lexical_item['Token'] == ':='):
             lexical_item = next()
             expression()
+            # atributes b here
             return
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'if'):
@@ -424,11 +560,12 @@ def subprogramDeclaration():
         if (lexical_item['Classification'] == 'Identifier'):
 
             if (declaration_key == 0):
+                lexical_item['Type'] = 'procedure'
                 symbolsStack.push(lexical_item)
                 symbolsStack.push(
                     {'Token': '$', 'Classification': 'initMark', 'Line': lexical_item['Line']})
             else:
-                symbolsStack.search(lexical_item['Token'])
+                symbolsStack.search(lexical_item)
 
             lexical_item = next()
             arguments()
@@ -482,12 +619,10 @@ def type():
 
         symbolsArray = symbolsStack.get().copy()
         for i in range(0, len(symbolsArray)):
-            # print(symbol)
             if ('Type' in symbolsArray[i]
                     and symbolsArray[i]['Type'] == 'Mark'):
                 symbolsStack.setType(i, lexical_item['Token'])
-
-        print(symbolsStack.getProgramTokens())
+        # print(symbolsStack.getProgramTokens())
 
         lexical_item = next()
 
@@ -509,7 +644,7 @@ def listOfIdentifiersLine():
                 symbolsStack.push(lexical_item)
                 identifier_stack.append(lexical_item['Token'])
             else:
-                symbolsStack.search(lexical_item['Token'])
+                symbolsStack.search(lexical_item)
 
             lexical_item = next()
             listOfIdentifiersLine()
@@ -531,7 +666,7 @@ def listOfIdentifiers():
             symbolsStack.push(lexical_item)
             identifier_stack.append(lexical_item['Token'])
         else:
-            symbolsStack.search(lexical_item['Token'])
+            symbolsStack.search(lexical_item)
 
         lexical_item = next()
         listOfIdentifiersLine()
@@ -614,7 +749,7 @@ def program():
                 symbolsStack.push(lexical_item)
                 # print(symbolsStack.getProgramTokens())
             else:
-                symbolsStack.search(lexical_item['Token'])
+                symbolsStack.search(lexical_item)
 
             lexical_item = next()
             if (lexical_item['Token'] == ';'):
