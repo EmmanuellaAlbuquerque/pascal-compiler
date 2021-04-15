@@ -4,6 +4,7 @@ Program exemplo;
   procedure p (x: integer);
     var b,c: integer;
     begin
+      b := 10 + a;
       b := x + a;
     end;
   procedure d (x: integer);

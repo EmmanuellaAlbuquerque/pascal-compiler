@@ -63,7 +63,11 @@ b. Símbolos não pertencentes a linguagem. <br>
 
 
 ### Verificação de Tipos
+- [ ] Pilha de Controle de Tipos (PcT)
 - [ ] Expressões Aritméticas
 - [ ] Comando de Atribuição
 - [ ] Expressões Relacionais
 - [ ] Expressões Lógicas
+
+- [ ] Compatibilidade de Tipos
+

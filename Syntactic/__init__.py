@@ -27,7 +27,6 @@ class SymbolsStack:
 
     def search(self, token):
         i = len(self.symbols_stack) - 1
-        j = len(type_control_stack) - 1
         # while didn't reach the end of the scope
         while (i >= 0):
             if (self.symbols_stack[i]['Token'] == token):
@@ -58,8 +57,14 @@ class SymbolsStack:
     def getProgramTokens(self):
         stack = list()
         for element in self.symbols_stack:
-            stack.append(element['Token'])
-        print(', '.join(stack))
+            stack.append(str(element))
+        print(',\n'.join(stack))
+
+    def setType(self, i, type):
+        self.symbols_stack[i]['Type'] = type
+
+    def get(self):
+        return self.symbols_stack
 
 
 symbolsStack = SymbolsStack()
@@ -87,6 +92,10 @@ def AdditiveOp():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == '+' or lexical_item['Token'] == '-' or lexical_item['Token'].lower() == 'or'):
         lexical_item = next()
+
+    # for element in type_control_stack:
+    #     print(element)
+    # print('---------------------------------------')
 
 
 def relationalOp():
@@ -471,13 +480,14 @@ def type():
         or lexical_item['Token'].lower() == 'char'
             or lexical_item['Token'].lower() == 'boolean'):
 
-        i = 0
-        # for every identifier you have to save what is its type
-        while (i < len(identifier_stack)):
-            type_control_stack.append(
-                {'Token': identifier_stack[i], 'Type': lexical_item['Token']})
-            i += 1
-        identifier_stack.clear()
+        symbolsArray = symbolsStack.get().copy()
+        for i in range(0, len(symbolsArray)):
+            # print(symbol)
+            if ('Type' in symbolsArray[i]
+                    and symbolsArray[i]['Type'] == 'Mark'):
+                symbolsStack.setType(i, lexical_item['Token'])
+
+        print(symbolsStack.getProgramTokens())
 
         lexical_item = next()
 
@@ -495,6 +505,7 @@ def listOfIdentifiersLine():
         if (lexical_item['Classification'] == 'Identifier'):
 
             if (declaration_key == 0):
+                lexical_item['Type'] = 'Mark'
                 symbolsStack.push(lexical_item)
                 identifier_stack.append(lexical_item['Token'])
             else:
@@ -516,6 +527,7 @@ def listOfIdentifiers():
     if (lexical_item['Classification'] == 'Identifier'):
 
         if (declaration_key == 0):
+            lexical_item['Type'] = 'Mark'
             symbolsStack.push(lexical_item)
             identifier_stack.append(lexical_item['Token'])
         else:
@@ -600,8 +612,7 @@ def program():
             if (declaration_key == 0):
                 lexical_item['Type'] = 'program'
                 symbolsStack.push(lexical_item)
-                type_control_stack.append(
-                    {'Token': lexical_item['Token'], 'Type': 'program'})
+                # print(symbolsStack.getProgramTokens())
             else:
                 symbolsStack.search(lexical_item['Token'])
 
@@ -644,5 +655,5 @@ def runSyntacticAnalysis(current_dict):
     program()
     print('Syntactic Analysis SUCCESS! finished!')
 
-    for element in type_control_stack:
-        print(element)
+    # for element in type_control_stack:
+    #     print(element)
