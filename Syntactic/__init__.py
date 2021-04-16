@@ -86,10 +86,10 @@ def updateTCS(type='additiveMultiplicativeOp'):
 
         if (type == 'relationalOp'):
             type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'boolean'})
+                {'Token': 'integer (rellOp) integer', 'Type': 'boolean'})
         else:
             type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'integer'})
+                {'Token': 'integer (addMultOP) integer', 'Type': 'integer'})
     elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'real'):
         # updates PCT
         type_control_stack.pop(-1)
@@ -124,13 +124,8 @@ def updateTCS(type='additiveMultiplicativeOp'):
         # updates PCT
         type_control_stack.pop(-1)
         type_control_stack.pop(-1)
-
-        if (type == 'relationalOp'):
-            type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'boolean'})
-        else:
-            type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'boolean'})
+        type_control_stack.append(
+            {'Token': 'resultType', 'Type': 'boolean'})
     elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'procedure'):
         # updates PCT
         type_control_stack.pop(-1)
@@ -167,6 +162,15 @@ def next():
 def multiplicativeOp():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'] == '*' or lexical_item['Token'] == '/' or lexical_item['Token'].lower() == 'and'):
+
+        # if (lexical_item['Token'].lower() == 'and'):
+        #     position = (len(type_control_stack) - 1) - 1
+        #     # print(position)
+        #     type_control_stack.insert(position,
+        #                               {'Token': 'andResult', 'Classification': 'boolean', 'Line': 7, 'Type': 'boolean'})
+        # print(type_control_stack)
+        # exit()
+
         lexical_item = next()
 
 
@@ -269,14 +273,14 @@ def termLine():
         multiplicativeOp()
         factor()
 
-        print('--------- type control stack ----------')
+        print('--------- Multiplicative type control stack ----------')
         for element in type_control_stack:
             print(element)
         print('---------------------------------------')
 
         updateTCS()
 
-        print('--------- deleted type control stack ----------')
+        print('--------- Multiplicative deleted type control stack ----------')
         for element in type_control_stack:
             print(element)
         print('---------------------------------------')
@@ -297,14 +301,14 @@ def simpleExpressionLine():
         AdditiveOp()
         term()
 
-        print('--------- type control stack ----------')
+        print('--------- Additive type control stack ----------')
         for element in type_control_stack:
             print(element)
         print('---------------------------------------')
 
         updateTCS()
 
-        print('--------- deleted type control stack ----------')
+        print('--------- Additive deleted type control stack ----------')
         for element in type_control_stack:
             print(element)
         print('---------------------------------------')
@@ -328,7 +332,7 @@ def expressionC():
 
         updateTCS(type='relationalOp')
 
-        print('--------- type control stack ----------')
+        print('--------- Relational type control stack ----------')
         for element in type_control_stack:
             print(element)
         print('---------------------------------------')
@@ -341,19 +345,18 @@ def expression():
     simpleExpression()
     expressionC()
 
-    print('--------- type control stack ----------')
+    print('--------- expression type control stack ----------')
     for element in type_control_stack:
         print(element)
     print('---------------------------------------')
 
-    updateTCS()
+    # if (len(type_control_stack) > 1):
+    #     updateTCS()
 
-    print('--------- deleted type control stack ----------')
+    print('--------- expression deleted type control stack ----------')
     for element in type_control_stack:
         print(element)
     print('---------------------------------------')
-
-    # exit()
 
 
 def expressionsListLine():
@@ -435,8 +438,32 @@ def command():
         if (lexical_item['Token'] == ':='):
             lexical_item = next()
             expression()
-            # atributes b here
+            # Assignment Command: atributes result to identifier here
+            print('--------- Assignment Command type control stack ----------')
+            for element in type_control_stack:
+                print(element)
+            print('---------------------------------------')
+
+            updateTCS()
+
+            print('--------- Additive deleted type control stack ----------')
+            for element in type_control_stack:
+                print(element)
+            print('---------------------------------------')
             return
+
+        print('--------- Procedure type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+
+        updateTCS()
+
+        print('--------- Procedure deleted type control stack ----------')
+        for element in type_control_stack:
+            print(element)
+        print('---------------------------------------')
+        return
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'if'):
         lexical_item = next()
@@ -504,8 +531,8 @@ def compositeCommand():
                 symbolsStack.closeScope()
             lexical_item = next()
         else:
-            if (lexical_item['Classification'] == 'Identifier'):
-                raise Exception('compositeCommand, in line ' + str(lexical_item['Line']) + ' \n'
+            if (lexical_item['Classification'] == 'Identifier' or lexical_item['Classification'] == 'Reserved Word'):
+                raise Exception('compositeCommand, in line ' + str(lexical_item['Line'] - 1) + ' \n'
                                 + 'error, waiting ";" but came: '
                                 + '"'
                                 + lexical_item['Token'] + '"')

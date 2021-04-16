@@ -4,10 +4,13 @@ Program exemplo;
   procedure p (x: integer);
     var b,c: integer;
     begin
+      if (true and false) then
+        b := x + a;
+      if ((10 > 11) or false) then
+        b := x + a;
       boolean_value := 10 > 11;
       boolean_value := 10 + 15 > 11 + 20;
       b := 10 + a * 11;
-      b := x + a;
     end;
   procedure d (x: integer);
     var h: integer;
