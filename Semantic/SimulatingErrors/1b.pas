@@ -1,5 +1,10 @@
+{ 
+  1. B
+  Em um mesmo escopo não poderá ser declarado identificadores com o mesmo
+  nome.
+}
 Program exemplo;
-  var a,b: integer; 
+  var a,b,a: integer; 
   boolean_value: boolean;
   procedure p (x: integer);
     var b,c: integer;

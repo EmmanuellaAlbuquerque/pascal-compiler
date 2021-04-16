@@ -15,10 +15,10 @@ class SymbolsStack:
     def push(self, tokenItem):
         i = len(self.symbols_stack) - 1
         # while didn't reach the end of the scope
-        while (i > 0 and self.symbols_stack[i] != '$'):
-            if (self.symbols_stack[i] == tokenItem['Token']):
+        while (i > 0 and self.symbols_stack[i]['Token'] != '$'):
+            if (self.symbols_stack[i]['Token'] == tokenItem['Token']):
                 raise Exception('variable: ' + tokenItem['Token'] +
-                                ' has already been declared')
+                                ' has already been declared in line: ' + str(self.symbols_stack[i]['Line']))
             i -= 1
         self.symbols_stack.append(tokenItem)
 

@@ -5,14 +5,13 @@ sys.tracebacklimit = 0
 
 
 class Lexical:
-    def __init__(self, filename):
+    def __init__(self, path_filename):
         self.path_directory = os.path.dirname(os.path.abspath(__file__))
 
         self.reserved_words = ('program', 'var', 'begin', 'end', 'integer', 'real', 'if', 'then',
                                'else', 'boolean', 'char', 'procedure', 'while', 'do', 'not', 'true', 'false')
 
-        file_src = self.path_directory + \
-            os.path.join("/../.pas", filename)
+        file_src = path_filename
 
         file = open(file_src, 'r')
         content = file.read()
