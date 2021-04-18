@@ -122,11 +122,21 @@ def updateTCS(type='additiveMultiplicativeOp'):
         else:
             type_control_stack.append({'Token': 'resultType', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'boolean' and type_control_stack[-2]['Type'] == 'boolean'):
-        # updates PCT
-        type_control_stack.pop(-1)
-        type_control_stack.pop(-1)
-        type_control_stack.append(
-            {'Token': 'resultType', 'Type': 'boolean'})
+        if (type == 'relationalOp'):
+            line = ''
+            if ('Line' in type_control_stack[-2]):
+                line = type_control_stack[-2]['Line']
+            raise Exception('in line ' + str(line) + ' relational operation between booleans\n     type1: ' +
+                            str(type_control_stack[-1]['Type']) +
+                            '\n     type2: ' +
+                            str(type_control_stack[-2]['Type']) +
+                            '\n     relational operations can only be performed between numeric values')
+        else:
+            # updates PCT
+            type_control_stack.pop(-1)
+            type_control_stack.pop(-1)
+            type_control_stack.append(
+                {'Token': 'resultType', 'Type': 'boolean'})
     elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'procedure'):
         # updates PCT
         type_control_stack.pop(-1)
