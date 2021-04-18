@@ -7,8 +7,6 @@
 |  a                             |  Identifier                    |  6      |
 |  ,                             |  Delimiter                     |  6      |
 |  b                             |  Identifier                    |  6      |
-|  ,                             |  Delimiter                     |  6      |
-|  a                             |  Identifier                    |  6      |
 |  :                             |  Delimiter                     |  6      |
 |  integer                       |  Reserved Word                 |  6      |
 |  ;                             |  Delimiter                     |  6      |
@@ -60,7 +58,7 @@
 |  :=                            |  Assignment Command            |  14     |
 |  x                             |  Identifier                    |  14     |
 |  +                             |  Additive Operator             |  14     |
-|  a                             |  Identifier                    |  14     |
+|  y                             |  Identifier                    |  14     |
 |  ;                             |  Delimiter                     |  14     |
 |  boolean_value                 |  Identifier                    |  15     |
 |  :=                            |  Assignment Command            |  15     |

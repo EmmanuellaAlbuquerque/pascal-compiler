@@ -8,7 +8,7 @@ path_directory = os.path.dirname(os.path.abspath(__file__))
 #     os.path.join("/.pas", 'example.pas')
 
 path_filename = path_directory + \
-    os.path.join("/Semantic/SimulatingErrors/", '1b.pas')
+    os.path.join("/Semantic/SimulatingErrors/", '1e.pas')
 
 lexical = Lexical(path_filename)
 lexical_dict = lexical.runLexicalAnalysis()

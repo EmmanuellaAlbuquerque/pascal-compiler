@@ -17,8 +17,9 @@ class SymbolsStack:
         # while didn't reach the end of the scope
         while (i > 0 and self.symbols_stack[i]['Token'] != '$'):
             if (self.symbols_stack[i]['Token'] == tokenItem['Token']):
-                raise Exception('variable: ' + tokenItem['Token'] +
-                                ' has already been declared in line: ' + str(self.symbols_stack[i]['Line']))
+                raise Exception('redeclaration in line ' + str(tokenItem['Line']) +
+                                '\nvariable: "' + tokenItem['Token'] +
+                                '" has already been declared in line: ' + str(self.symbols_stack[i]['Line']))
             i -= 1
         self.symbols_stack.append(tokenItem)
 
@@ -46,8 +47,8 @@ class SymbolsStack:
                 return True
             i -= 1
         symbolsStack.getProgramTokens()
-        raise Exception('Semantic error, variable: ' +
-                        tokenItem['Token'] + ' used but not declared')
+        raise Exception('Semantic error,\nvariable: "' +
+                        tokenItem['Token'] + '" in line ' + str(tokenItem['Line']) + ' used but not declared.')
 
     def closeScope(self):
         i = len(self.symbols_stack) - 1
