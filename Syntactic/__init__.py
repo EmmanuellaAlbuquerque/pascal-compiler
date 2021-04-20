@@ -79,6 +79,17 @@ class SymbolsStack:
 symbolsStack = SymbolsStack()
 
 
+def logicError(error, message):
+    line = ''
+    if ('Line' in type_control_stack[-2]):
+        line = type_control_stack[-2]['Line']
+    raise Exception('in line ' + str(line) + error + '\n     type1: ' +
+                    str(type_control_stack[-1]['Type']) +
+                    '\n     type2: ' +
+                    str(type_control_stack[-2]['Type']) +
+                    '\n     ' + message)
+
+
 def updateTCS(type='additiveMultiplicativeOp'):
     if (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'integer'):
         if (type == 'logicOp'):
@@ -96,10 +107,10 @@ def updateTCS(type='additiveMultiplicativeOp'):
             type_control_stack.pop(-1)
             if (type == 'relationalOp'):
                 type_control_stack.append(
-                    {'Token': 'integer (rellOp) integer', 'Type': 'boolean'})
+                    {'Token': 'Result', 'Type': 'boolean'})
             else:
                 type_control_stack.append(
-                    {'Token': 'integer (addMultOP) integer', 'Type': 'integer'})
+                    {'Token': 'Result', 'Type': 'integer'})
     elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'real'):
         if (type == 'logicOp'):
             line = ''
@@ -116,10 +127,10 @@ def updateTCS(type='additiveMultiplicativeOp'):
             type_control_stack.pop(-1)
             if (type == 'relationalOp'):
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'boolean'})
+                    {'Token': 'Result', 'Type': 'boolean'})
             else:
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'real'})
+                    {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'real'):
         if (type == 'logicOp'):
             line = ''
@@ -136,10 +147,10 @@ def updateTCS(type='additiveMultiplicativeOp'):
             type_control_stack.pop(-1)
             if (type == 'relationalOp'):
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'boolean'})
+                    {'Token': 'Result', 'Type': 'boolean'})
             else:
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'real'})
+                    {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'integer'):
         if (type == 'logicOp'):
             line = ''
@@ -151,16 +162,34 @@ def updateTCS(type='additiveMultiplicativeOp'):
                             str(type_control_stack[-1]['Type']) +
                             '\n     logic operations can only be performed between booleans')
         else:
+            if (type == 'assignmentCommand'):
+                line = ''
+                if ('searchLine' in type_control_stack[-2]):
+                    line = type_control_stack[-2]['searchLine']
+                raise Exception('in line ' + str(line) + '\n     type1: ' +
+                                str(type_control_stack[-2]['Type']) +
+                                '\n     type2: ' +
+                                str(type_control_stack[-1]['Type']) +
+                                '\n     Assignment Type mismatch, Incompatibility of Types')
             # updates PCT
             type_control_stack.pop(-1)
             type_control_stack.pop(-1)
             if (type == 'relationalOp'):
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'boolean'})
+                    {'Token': 'Result', 'Type': 'boolean'})
             else:
                 type_control_stack.append(
-                    {'Token': 'resultType', 'Type': 'real'})
+                    {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'boolean' and type_control_stack[-2]['Type'] == 'boolean'):
+        if (type == 'additiveMultiplicativeOp'):
+            line = ''
+            if ('searchLine' in type_control_stack[-1]):
+                line = type_control_stack[-1]['searchLine']
+            raise Exception('in line ' + str(line) + ' Additive or Multiplicative operation between booleans\n     type1: ' +
+                            str(type_control_stack[-1]['Type']) +
+                            '\n     type2: ' +
+                            str(type_control_stack[-2]['Type']) +
+                            '\n     Additive or Multiplicative operations can only be performed between numeric values')
         if (type == 'relationalOp'):
             line = ''
             if ('Line' in type_control_stack[-2]):
@@ -175,7 +204,7 @@ def updateTCS(type='additiveMultiplicativeOp'):
             type_control_stack.pop(-1)
             type_control_stack.pop(-1)
             type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'boolean'})
+                {'Token': 'Result', 'Type': 'boolean'})
     elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'procedure'):
         # updates PCT
         type_control_stack.pop(-1)
@@ -183,9 +212,9 @@ def updateTCS(type='additiveMultiplicativeOp'):
 
         if (type == 'relationalOp'):
             type_control_stack.append(
-                {'Token': 'resultType', 'Type': 'boolean'})
+                {'Token': 'Result', 'Type': 'boolean'})
         else:
-            type_control_stack.append({'Token': 'resultType', 'Type': 'void'})
+            type_control_stack.append({'Token': 'Result', 'Type': 'void'})
     else:
         line = ''
         if ('searchLine' in type_control_stack[-2]):
@@ -495,7 +524,7 @@ def command():
                 print(element)
             print('---------------------------------------')
 
-            updateTCS()
+            updateTCS(type="assignmentCommand")
 
             print('--------- Additive deleted type control stack ----------')
             for element in type_control_stack:

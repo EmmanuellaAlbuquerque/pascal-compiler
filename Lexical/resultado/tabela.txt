@@ -3,15 +3,20 @@
 |  Program                       |  Reserved Word                 |  6      |
 |  exemplo                       |  Identifier                    |  6      |
 |  ;                             |  Delimiter                     |  6      |
-|  var                           |  Reserved Word                 |  7      |
-|  isBoolean                     |  Identifier                    |  7      |
-|  :                             |  Delimiter                     |  7      |
-|  boolean                       |  Reserved Word                 |  7      |
-|  ;                             |  Delimiter                     |  7      |
-|  begin                         |  Reserved Word                 |  8      |
-|  isBoolean                     |  Identifier                    |  9      |
-|  :=                            |  Assignment Command            |  9      |
-|  10                            |  integer                       |  9      |
-|  ;                             |  Delimiter                     |  9      |
-|  end                           |  Reserved Word                 |  10     |
-|  .                             |  Delimiter                     |  10     |
+|  var                           |  Reserved Word                 |  16     |
+|  v1                            |  Identifier                    |  16     |
+|  ,                             |  Delimiter                     |  16     |
+|  v2                            |  Identifier                    |  16     |
+|  ,                             |  Delimiter                     |  16     |
+|  v3                            |  Identifier                    |  16     |
+|  :                             |  Delimiter                     |  16     |
+|  real                          |  Reserved Word                 |  16     |
+|  ;                             |  Delimiter                     |  16     |
+|  begin                         |  Reserved Word                 |  17     |
+|  v3                            |  Identifier                    |  18     |
+|  :=                            |  Assignment Command            |  18     |
+|  v1                            |  Identifier                    |  18     |
+|  +                             |  Additive Operator             |  18     |
+|  v2                            |  Identifier                    |  18     |
+|  end                           |  Reserved Word                 |  19     |
+|  .                             |  Delimiter                     |  19     |

@@ -1,5 +1,5 @@
 { 
-  1. B
+  2. B
   Devem ser identificadas atribuições e inicializações inválidas de variáveis. 
   Por exemplo, variáveis do tipo boolean recebendo números. 
 }
