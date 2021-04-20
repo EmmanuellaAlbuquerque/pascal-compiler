@@ -191,9 +191,9 @@ def updateTCS(type='additiveMultiplicativeOp'):
         if ('searchLine' in type_control_stack[-2]):
             line = type_control_stack[-2]['searchLine']
         raise Exception('in line ' + str(line) + '\n     type1: ' +
-                        str(type_control_stack[-1]['Type']) +
-                        '\n     type2: ' +
                         str(type_control_stack[-2]['Type']) +
+                        '\n     type2: ' +
+                        str(type_control_stack[-1]['Type']) +
                         '\n     Type mismatch, Incompatibility of Types')
 
 
