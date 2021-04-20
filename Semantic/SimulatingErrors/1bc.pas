@@ -2,6 +2,10 @@
   1. B
   Em um mesmo escopo não poderá ser declarado identificadores com o mesmo
   nome.
+
+  1. C
+  Identificadores já declarados podem ser novamente declarados em escopos
+  diferentes.
 }
 Program exemplo;
   var a,b,a: integer; 
