@@ -209,12 +209,6 @@ def AdditiveOp():
         lexical_item = next()
         return type
 
-    # print('--------- type control stack ----------')
-    # for element in type_control_stack:
-    #     print(element)
-    # print('---------------------------------------')
-    # exit()
-
 
 def relationalOp():
     lexical_item = lexical_dict[current_id]
@@ -256,8 +250,6 @@ def factorC():
 def factor():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
-
-        # print('factor' + str(lexical_item))
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
         else:
@@ -304,17 +296,17 @@ def termLine():
         type = multiplicativeOp()
         factor()
 
-        print('--------- Multiplicative type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Multiplicative type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
 
         updateTCS(type)
 
-        print('--------- Multiplicative deleted type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Multiplicative deleted type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
 
         termLine()
     else:
@@ -333,17 +325,17 @@ def simpleExpressionLine():
         type = AdditiveOp()
         term()
 
-        print('--------- Additive type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Additive type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
 
         updateTCS(type)
 
-        print('--------- Additive deleted type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Additive deleted type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
 
         simpleExpressionLine()
     else:
@@ -364,10 +356,10 @@ def expressionC():
 
         updateTCS(type='relationalOp')
 
-        print('--------- Relational type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Relational type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
         # exit()
     else:
         pass
@@ -377,18 +369,15 @@ def expression():
     simpleExpression()
     expressionC()
 
-    print('--------- expression type control stack ----------')
-    for element in type_control_stack:
-        print(element)
-    print('---------------------------------------')
+    # print('--------- expression type control stack ----------')
+    # for element in type_control_stack:
+    #     print(element)
+    # print('---------------------------------------')
 
-    # if (len(type_control_stack) > 1):
-    #     updateTCS()
-
-    print('--------- expression deleted type control stack ----------')
-    for element in type_control_stack:
-        print(element)
-    print('---------------------------------------')
+    # print('--------- expression deleted type control stack ----------')
+    # for element in type_control_stack:
+    #     print(element)
+    # print('---------------------------------------')
 
 
 def expressionsListLine():
@@ -439,14 +428,10 @@ def procedureActivation():
 def variable():
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Classification'] == 'Identifier'):
-
         if (declaration_key == 0):
             symbolsStack.push(lexical_item)
         else:
             symbolsStack.search(lexical_item)
-            # print('variable' + str(lexical_item))
-            # print(symbolsStack.getProgramTokens())
-
         lexical_item = next()
     else:
         pass
@@ -471,30 +456,30 @@ def command():
             lexical_item = next()
             expression()
             # Assignment Command: atributes result to identifier here
-            print('--------- Assignment Command type control stack ----------')
-            for element in type_control_stack:
-                print(element)
-            print('---------------------------------------')
+            # print('--------- Assignment Command type control stack ----------')
+            # for element in type_control_stack:
+            #     print(element)
+            # print('---------------------------------------')
 
             updateTCS(type="assignmentCommand")
 
-            print('--------- Additive deleted type control stack ----------')
-            for element in type_control_stack:
-                print(element)
-            print('---------------------------------------')
+            # print('--------- Additive deleted type control stack ----------')
+            # for element in type_control_stack:
+            #     print(element)
+            # print('---------------------------------------')
             return
 
-        print('--------- Procedure type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Procedure type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
 
         updateTCS()
 
-        print('--------- Procedure deleted type control stack ----------')
-        for element in type_control_stack:
-            print(element)
-        print('---------------------------------------')
+        # print('--------- Procedure deleted type control stack ----------')
+        # for element in type_control_stack:
+        #     print(element)
+        # print('---------------------------------------')
         return
     lexical_item = lexical_dict[current_id]
     if (lexical_item['Token'].lower() == 'if'):
@@ -681,10 +666,7 @@ def type():
             if ('Type' in symbolsArray[i]
                     and symbolsArray[i]['Type'] == 'Mark'):
                 symbolsStack.setType(i, lexical_item['Token'])
-        # print(symbolsStack.getProgramTokens())
-
         lexical_item = next()
-
     else:
         raise Exception('type, in line ' + str(lexical_item['Line']) + ' \n'
                         + 'error, invalid type: '
@@ -802,14 +784,11 @@ def program():
             {'Token': '$', 'Classification': 'initMark', 'Line': lexical_item['Line']})
         lexical_item = next()
         if (lexical_item['Classification'] == 'Identifier'):
-
             if (declaration_key == 0):
                 lexical_item['Type'] = 'program'
                 symbolsStack.push(lexical_item)
-                # print(symbolsStack.getProgramTokens())
             else:
                 symbolsStack.search(lexical_item)
-
             lexical_item = next()
             if (lexical_item['Token'] == ';'):
                 lexical_item = next()
@@ -823,7 +802,6 @@ def program():
                                     + 'error, waiting "." but came: '
                                     + '"'
                                     + lexical_item['Token'] + '"')
-
             else:
                 raise Exception('program, in line ' + str(lexical_item['Line']) + ' \n'
                                 + 'error, waiting ";" but came: '
@@ -847,7 +825,8 @@ def runSyntacticAnalysis(current_dict):
     lexical_dict = current_dict
 
     program()
-    print('Syntactic Analysis SUCCESS! finished!')
+    print('\nSyntactic & Semantic Analysis SUCCESS! finished!')
 
-    # for element in type_control_stack:
-    #     print(element)
+    print('\n---------------- (Tcs) Type Control Stack ----------------')
+    for element in type_control_stack:
+        print(element)
