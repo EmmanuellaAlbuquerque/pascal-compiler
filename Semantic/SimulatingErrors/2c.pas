@@ -14,6 +14,8 @@ Program exemplo;
   {var v2, v3: real; v1: integer;} {Integer Real Real OK}
   {var v1, v3: real; v2: integer;} {Real Integer Real OK}
   var v1, v2, v3: real; {Real Real Real OK}
+
+  {var v1, v2, v3: boolean;}
 begin
-  v3 := v1 + v2
+  v3 := v1 + v2;
 end.

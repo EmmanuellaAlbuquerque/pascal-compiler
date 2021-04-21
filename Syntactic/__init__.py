@@ -79,28 +79,24 @@ class SymbolsStack:
 symbolsStack = SymbolsStack()
 
 
-def logicError(error, message):
+def TCSError(error, message):
     line = ''
     if ('Line' in type_control_stack[-2]):
         line = type_control_stack[-2]['Line']
-    raise Exception('in line ' + str(line) + error + '\n     type1: ' +
-                    str(type_control_stack[-1]['Type']) +
-                    '\n     type2: ' +
+    elif ('searchLine' in type_control_stack[-2]):
+        line = type_control_stack[-2]['searchLine']
+    raise Exception('in line ' + str(line) + ', ' + error + '\n     type1: ' +
                     str(type_control_stack[-2]['Type']) +
+                    '\n     type2: ' +
+                    str(type_control_stack[-1]['Type']) +
                     '\n     ' + message)
 
 
 def updateTCS(type='additiveMultiplicativeOp'):
     if (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'integer'):
         if (type == 'logicOp'):
-            line = ''
-            if ('Line' in type_control_stack[-2]):
-                line = type_control_stack[-2]['Line']
-            raise Exception('in line ' + str(line) + ' logic operation between numeric values\n     type1: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     logic operations can only be performed between booleans')
+            TCSError('logic operation between numeric values',
+                     'logic operations can only be performed between booleans')
         else:
             # updates PCT
             type_control_stack.pop(-1)
@@ -113,14 +109,8 @@ def updateTCS(type='additiveMultiplicativeOp'):
                     {'Token': 'Result', 'Type': 'integer'})
     elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'real'):
         if (type == 'logicOp'):
-            line = ''
-            if ('Line' in type_control_stack[-2]):
-                line = type_control_stack[-2]['Line']
-            raise Exception('in line ' + str(line) + ' logic operation between numeric values\n     type1: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     logic operations can only be performed between booleans')
+            TCSError('logic operation between numeric values',
+                     'logic operations can only be performed between booleans')
         else:
             # updates PCT
             type_control_stack.pop(-1)
@@ -133,14 +123,8 @@ def updateTCS(type='additiveMultiplicativeOp'):
                     {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'integer' and type_control_stack[-2]['Type'] == 'real'):
         if (type == 'logicOp'):
-            line = ''
-            if ('Line' in type_control_stack[-2]):
-                line = type_control_stack[-2]['Line']
-            raise Exception('in line ' + str(line) + ' logic operation between numeric values\n     type1: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     logic operations can only be performed between booleans')
+            TCSError('logic operation between numeric values',
+                     'logic operations can only be performed between booleans')
         else:
             # updates PCT
             type_control_stack.pop(-1)
@@ -153,24 +137,11 @@ def updateTCS(type='additiveMultiplicativeOp'):
                     {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'real' and type_control_stack[-2]['Type'] == 'integer'):
         if (type == 'logicOp'):
-            line = ''
-            if ('Line' in type_control_stack[-2]):
-                line = type_control_stack[-2]['Line']
-            raise Exception('in line ' + str(line) + ' logic operation between numeric values\n     type1: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     logic operations can only be performed between booleans')
+            TCSError('logic operation between numeric values',
+                     'logic operations can only be performed between booleans')
         else:
             if (type == 'assignmentCommand'):
-                line = ''
-                if ('searchLine' in type_control_stack[-2]):
-                    line = type_control_stack[-2]['searchLine']
-                raise Exception('in line ' + str(line) + '\n     type1: ' +
-                                str(type_control_stack[-2]['Type']) +
-                                '\n     type2: ' +
-                                str(type_control_stack[-1]['Type']) +
-                                '\n     Assignment Type mismatch, Incompatibility of Types')
+                TCSError('', 'Assignment Type mismatch, Incompatibility of Types')
             # updates PCT
             type_control_stack.pop(-1)
             type_control_stack.pop(-1)
@@ -182,23 +153,11 @@ def updateTCS(type='additiveMultiplicativeOp'):
                     {'Token': 'Result', 'Type': 'real'})
     elif (type_control_stack[-1]['Type'] == 'boolean' and type_control_stack[-2]['Type'] == 'boolean'):
         if (type == 'additiveMultiplicativeOp'):
-            line = ''
-            if ('searchLine' in type_control_stack[-1]):
-                line = type_control_stack[-1]['searchLine']
-            raise Exception('in line ' + str(line) + ' Additive or Multiplicative operation between booleans\n     type1: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     Additive or Multiplicative operations can only be performed between numeric values')
+            TCSError('Additive or Multiplicative operation between booleans',
+                     'Additive or Multiplicative operations can only be performed between numeric values')
         if (type == 'relationalOp'):
-            line = ''
-            if ('Line' in type_control_stack[-2]):
-                line = type_control_stack[-2]['Line']
-            raise Exception('in line ' + str(line) + ' relational operation between booleans\n     type1: ' +
-                            str(type_control_stack[-1]['Type']) +
-                            '\n     type2: ' +
-                            str(type_control_stack[-2]['Type']) +
-                            '\n     relational operations can only be performed between numeric values')
+            TCSError('relational operation between booleans',
+                     'relational operations can only be performed between numeric values')
         else:
             # updates PCT
             type_control_stack.pop(-1)
@@ -216,14 +175,7 @@ def updateTCS(type='additiveMultiplicativeOp'):
         else:
             type_control_stack.append({'Token': 'Result', 'Type': 'void'})
     else:
-        line = ''
-        if ('searchLine' in type_control_stack[-2]):
-            line = type_control_stack[-2]['searchLine']
-        raise Exception('in line ' + str(line) + '\n     type1: ' +
-                        str(type_control_stack[-2]['Type']) +
-                        '\n     type2: ' +
-                        str(type_control_stack[-1]['Type']) +
-                        '\n     Type mismatch, Incompatibility of Types')
+        TCSError('', 'Type mismatch, Incompatibility of Types')
 
 
 def next():
