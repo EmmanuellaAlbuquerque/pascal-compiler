@@ -81,10 +81,11 @@ symbolsStack = SymbolsStack()
 
 def TCSError(error, message):
     line = ''
-    if ('Line' in type_control_stack[-2]):
-        line = type_control_stack[-2]['Line']
-    elif ('searchLine' in type_control_stack[-2]):
+
+    if ('searchLine' in type_control_stack[-2]):
         line = type_control_stack[-2]['searchLine']
+    elif ('Line' in type_control_stack[-2]):
+        line = type_control_stack[-2]['Line']
     raise Exception('in line ' + str(line) + ', ' + error + '\n     type1: ' +
                     str(type_control_stack[-2]['Type']) +
                     '\n     type2: ' +

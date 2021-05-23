@@ -1,13 +1,13 @@
 program exProcedure;
 var
-   a, b, c, min: integer;
+   a, b, c, min, m, z: integer;
 procedure findMin(x, y, z: integer; m: real);
 
 begin
    if (x < y) then
       m:= x
    else
-      m:= y;
+      m:= y + findMin;
    
    if (z < m) then
       m:= z;
