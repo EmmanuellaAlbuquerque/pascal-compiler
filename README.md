@@ -30,17 +30,17 @@ b. Símbolos não pertencentes a linguagem. <br>
 ### Algoritmo
 1. **:heavy_check_mark: Leia a entrada até o fim ou quando nenhuma transição é possível**
 2. **:heavy_check_mark: Se o estado corrente for final**
-    2.1 Retorne o token e o seu tipo
+    1. Retorne o token e o seu tipo
 3. **:heavy_check_mark: Se o estado corrente for não-final**
-    3.1 Voltar para último estado aceitável
-    3.2 Retornar o token e o tipo deste estado
-    3.4 Devolver os caracteres lidos deste ponto em diante para a entrada
+    1. Voltar para último estado aceitável
+    2. Retornar o token e o tipo deste estado
+    3. Devolver os caracteres lidos deste ponto em diante para a entrada
 4. **:heavy_check_mark: Se a entrada não acabou, reinicie o autômato**
 
 # Analisador Sintático
 ## Método Top-Down com análise preditiva recursiva direta
 
-Para remover as ambiguidades, devemos reescrever as expressões gramaticais ambíguas:
+Para remover as ambiguidades, devemos reescrever as expressões gramaticais ambíguas:<br>
 ex.: da precedência de operadores
 ### Eliminar:
 - [x] recursão a esquerda
