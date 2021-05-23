@@ -40,6 +40,8 @@ b. Símbolos não pertencentes a linguagem. <br>
 # Analisador Sintático
 ## Método Top-Down com análise preditiva recursiva direta
 
+Para remover as ambiguidades, devemos reescrever as expressões gramaticais ambíguas:
+ex.: da precedência de operadores
 ### Eliminar:
 - [x] recursão a esquerda
 - [x] recursão da linguagem
@@ -49,6 +51,10 @@ b. Símbolos não pertencentes a linguagem. <br>
 
 #### Regras utilizadas
 1. Retirar recursão a esquerda
+```text
+  A := Aα| β     --\     A := βA'
+                 --/     A' := αA'| ε
+```
 ```text
   E := E + T| T     --\     E → TE'
                     --/     E' → +TE'| ε
@@ -67,13 +73,10 @@ b. Símbolos não pertencentes a linguagem. <br>
 
 ### Tabela de Símbolos com estrutura de dados destrutiva e com pilha
 
-
 ### Verificação de Tipos
-- [ ] Pilha de Controle de Tipos (PcT)
-- [ ] Expressões Aritméticas
-- [ ] Comando de Atribuição
-- [ ] Expressões Relacionais
-- [ ] Expressões Lógicas
-
-- [ ] Compatibilidade de Tipos
-
+- [x] Pilha de Controle de Tipos (PcT)
+- [x] Expressões Aritméticas
+- [x] Comando de Atribuição
+- [x] Expressões Relacionais
+- [x] Expressões Lógicas
+- [x] Compatibilidade de Tipos
